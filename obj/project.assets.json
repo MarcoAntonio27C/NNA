@@ -2011,30 +2011,30 @@
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Context/1.0.0": {
+      "Modelos/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/Modelos.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Modelos.dll": {}
+        }
+      },
+      "NNAContext/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "5.0.15",
           "Microsoft.EntityFrameworkCore.Relational": "5.0.15",
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.15",
-          "Models": "1.0.0"
+          "Modelos": "1.0.0"
         },
         "compile": {
-          "bin/placeholder/Context.dll": {}
+          "bin/placeholder/NNAContext.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Context.dll": {}
-        }
-      },
-      "Models/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v5.0",
-        "compile": {
-          "bin/placeholder/Models.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Models.dll": {}
+          "bin/placeholder/NNAContext.dll": {}
         }
       }
     }
@@ -7165,24 +7165,24 @@
         "system.xml.xmlserializer.nuspec"
       ]
     },
-    "Context/1.0.0": {
+    "Modelos/1.0.0": {
       "type": "project",
-      "path": "../Context/Context.csproj",
-      "msbuildProject": "../Context/Context.csproj"
+      "path": "Modelos/Modelos.csproj",
+      "msbuildProject": "Modelos/Modelos.csproj"
     },
-    "Models/1.0.0": {
+    "NNAContext/1.0.0": {
       "type": "project",
-      "path": "../Models/Models.csproj",
-      "msbuildProject": "../Models/Models.csproj"
+      "path": "NNAContext/NNAContext.csproj",
+      "msbuildProject": "NNAContext/NNAContext.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0": [
-      "Context >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 5.0.15",
       "Microsoft.EntityFrameworkCore.SqlServer >= 5.0.15",
       "Microsoft.EntityFrameworkCore.Tools >= 5.0.15",
-      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 5.0.2"
+      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 5.0.2",
+      "NNAContext >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -7193,11 +7193,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ast\\Source\\Repos\\MarcoAntonio27C\\NNA\\NNA.csproj",
+      "projectUniqueName": "C:\\Users\\Ast\\source\\repos\\MarcoAntonio27C\\NNA\\NNA.csproj",
       "projectName": "NNA",
-      "projectPath": "C:\\Users\\Ast\\Source\\Repos\\MarcoAntonio27C\\NNA\\NNA.csproj",
+      "projectPath": "C:\\Users\\Ast\\source\\repos\\MarcoAntonio27C\\NNA\\NNA.csproj",
       "packagesPath": "C:\\Users\\Ast\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ast\\Source\\Repos\\MarcoAntonio27C\\NNA\\obj\\",
+      "outputPath": "C:\\Users\\Ast\\source\\repos\\MarcoAntonio27C\\NNA\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -7220,8 +7220,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\Ast\\Source\\Repos\\MarcoAntonio27C\\Context\\Context.csproj": {
-              "projectPath": "C:\\Users\\Ast\\Source\\Repos\\MarcoAntonio27C\\Context\\Context.csproj"
+            "C:\\Users\\Ast\\source\\repos\\MarcoAntonio27C\\NNA\\NNAContext\\NNAContext.csproj": {
+              "projectPath": "C:\\Users\\Ast\\source\\repos\\MarcoAntonio27C\\NNA\\NNAContext\\NNAContext.csproj"
             }
           }
         }

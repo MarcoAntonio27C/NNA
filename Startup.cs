@@ -10,7 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Context;
+using NNAContext;
 
 namespace NNA
 {
@@ -27,7 +27,7 @@ namespace NNA
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<NNADbContext>(options =>
+            services.AddDbContext<NNA_Context>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("NNA")));
                 services.AddControllersWithViews();
 

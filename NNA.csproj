@@ -5,6 +5,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="API\**" />
+    <Compile Remove="Modelos\**" />
+    <Compile Remove="NNAContext\**" />
+    <Content Remove="API\**" />
+    <Content Remove="Modelos\**" />
+    <Content Remove="NNAContext\**" />
+    <EmbeddedResource Remove="API\**" />
+    <EmbeddedResource Remove="Modelos\**" />
+    <EmbeddedResource Remove="NNAContext\**" />
+    <None Remove="API\**" />
+    <None Remove="Modelos\**" />
+    <None Remove="NNAContext\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.15">
@@ -19,7 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Context\Context.csproj" />
+    <ProjectReference Include="NNAContext\NNAContext.csproj" />
   </ItemGroup>
 
 </Project>

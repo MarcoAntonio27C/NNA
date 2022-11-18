@@ -33,11 +33,11 @@
     ".NETCoreApp,Version=v5.0": {
       "NNA/1.0.0": {
         "dependencies": {
-          "Context": "1.0.0",
           "Microsoft.EntityFrameworkCore": "5.0.15",
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.15",
           "Microsoft.EntityFrameworkCore.Tools": "5.0.15",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "5.0.2",
+          "NNAContext": "1.0.0",
           "Microsoft.AspNetCore.Antiforgery": "5.0.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions": "5.0.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "5.0.0.0",
@@ -1814,26 +1814,26 @@
           "System.Xml.XmlDocument": "4.3.0"
         }
       },
-      "Context/1.0.0": {
+      "Modelos/1.0.0": {
+        "runtime": {
+          "Modelos.dll": {}
+        },
+        "compile": {
+          "Modelos.dll": {}
+        }
+      },
+      "NNAContext/1.0.0": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "5.0.15",
           "Microsoft.EntityFrameworkCore.Relational": "5.0.15",
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.15",
-          "Models": "1.0.0"
+          "Modelos": "1.0.0"
         },
         "runtime": {
-          "Context.dll": {}
+          "NNAContext.dll": {}
         },
         "compile": {
-          "Context.dll": {}
-        }
-      },
-      "Models/1.0.0": {
-        "runtime": {
-          "Models.dll": {}
-        },
-        "compile": {
-          "Models.dll": {}
+          "NNAContext.dll": {}
         }
       },
       "Microsoft.AspNetCore.Antiforgery/5.0.0.0": {
@@ -4398,12 +4398,12 @@
       "path": "system.xml.xmlserializer/4.3.0",
       "hashPath": "system.xml.xmlserializer.4.3.0.nupkg.sha512"
     },
-    "Context/1.0.0": {
+    "Modelos/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "Models/1.0.0": {
+    "NNAContext/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

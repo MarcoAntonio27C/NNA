@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
-using Context;
+using NNAContext;
 
 namespace NNA.Controllers
 {
     public class AccesoController : Controller
     {
-        private readonly  NNADbContext _Context;
+        private readonly  NNA_Context _Context;
 
-        public AccesoController(NNADbContext context)
+        public AccesoController(NNA_Context context)
         {
             _Context = context;
         }
