@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NNAContext;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +10,18 @@ namespace NNA.Controllers
 {
     public class AgenteController : Controller
     {
-        public IActionResult Index()
+        private readonly NNA_Context _Context;
+
+        public AgenteController(NNA_Context context)
         {
+            _Context = context;
+        }
+        public async Task<IActionResult> IndexAsync()
+        {
+            var denuncias = await _Context.Denuncia.Where(x => x.Asignada.Equals(false)).ToListAsync();
+            ViewData["denuncias"] = denuncias;
             return View();
         }
     }
+
 }

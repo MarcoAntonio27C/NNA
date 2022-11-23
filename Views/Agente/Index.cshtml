@@ -1,7 +1,11 @@
-﻿@{
+﻿@using Modelos;
+@{
     ViewData["Title"] = "Agente Investigador";
+    List<Denuncia> denuncias = (List<Denuncia>)ViewData["denuncias"];
+    string niños = "Niños y Niñas";
+    string adolescentes = "Adolescentes";
 }
-
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div class="container   mx-auto ">
     <div class="rounded-lg mt-3 text-center text-2xl bg-yellow-600 text-white font-bold py-5">
         DENUNCIAS
@@ -31,47 +35,39 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        00000001
-                    </th>
-                    <td class="py-4 px-6">
-                        @DateTime.Now.ToString()
-                    </td>
-                    <td class="py-4 px-6">
-                        Niñas y Niños
-                    </td>
-                    <td class="py-4 px-6">
-                        Marco Antonio Cantero Contreras
-                    </td>
-                    <td class="py-4 px-6">
-                        7 años
-                    </td>
-                    <td class="py-4 px-6">
-                        <a asp-controller="Denuncia" asp-action="Index">Ver</a>
-                    </td>
-                </tr>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        00000002
-                    </th>
-                    <td class="py-4 px-6">
-                        @DateTime.Now.ToString()
-                    </td>
-                    <td class="py-4 px-6">
-                        Adolescentes
-                    </td>
-                    <td class="py-4 px-6">
-                        Pedro Angel
-                    </td>
-                    <td class="py-4 px-6">
-                        15 años
-                    </td>
-                    <td class="py-4 px-6">
-                        <a href="#">Ver</a>
-                    </td>
-                </tr>
+
+                @foreach (var denuncia in denuncias)
+                {
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            @denuncia.Folio.ToString("D6")
+                        </th>
+                        <td class="py-4 px-6">
+                            @denuncia.Fecha.ToString("D")
+                        </td>
+                        <td class="py-4 px-6">
+                            @if (denuncia.IdCaso.Equals(1))
+                            {
+                                @niños;
+                            }
+                            else
+                            {
+                                @adolescentes;
+                            }
+                        </td>
+                        <td class="py-4 px-6">
+                            @denuncia.Nombre
+                        </td>
+                        <td class="py-4 px-6">
+                            @denuncia.Edad
+                        </td>
+                        <td class="py-4 px-6">
+                            <a class="text-bold hover:text-yellow-600" asp-controller="Denuncia" asp-action="Index" asp-route-id="@denuncia.Id">Ver Denuncia</a>
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
 </div>
+

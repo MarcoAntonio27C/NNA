@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -6,15 +6,19 @@
 
   <ItemGroup>
     <Compile Remove="API\**" />
+    <Compile Remove="ConvertAudio\**" />
     <Compile Remove="Modelos\**" />
     <Compile Remove="NNAContext\**" />
     <Content Remove="API\**" />
+    <Content Remove="ConvertAudio\**" />
     <Content Remove="Modelos\**" />
     <Content Remove="NNAContext\**" />
     <EmbeddedResource Remove="API\**" />
+    <EmbeddedResource Remove="ConvertAudio\**" />
     <EmbeddedResource Remove="Modelos\**" />
     <EmbeddedResource Remove="NNAContext\**" />
     <None Remove="API\**" />
+    <None Remove="ConvertAudio\**" />
     <None Remove="Modelos\**" />
     <None Remove="NNAContext\**" />
   </ItemGroup>

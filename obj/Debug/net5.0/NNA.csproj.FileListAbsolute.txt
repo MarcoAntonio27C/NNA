@@ -267,3 +267,5 @@ C:\Users\Ast\source\repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\NNA.dll
 C:\Users\Ast\source\repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\ref\NNA.dll
 C:\Users\Ast\source\repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\NNA.pdb
 C:\Users\Ast\source\repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\NNA.genruntimeconfig.cache
+C:\Users\Ast\source\repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\Razor\Views\Administrador\Index.cshtml.g.cs
+C:\Users\Ast\source\repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\Razor\Views\Usuarios\Index.cshtml.g.cs

@@ -10,8 +10,7 @@ namespace Modelos
     public class Denuncia
     {
         public Guid Id { get; set; }
-        public string NumeroDenuncia { get; set; }
-
+        public string Expediente { get; set; }
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Folio { get; set; }
         public DateTime  Fecha { get; set; }
@@ -36,5 +35,7 @@ namespace Modelos
         public int IdEmotion { get; set; }
         public int IdAction { get; set; }
         public int IdCaso { get; set; }
+        public Guid IdMp { get; set; }
+        public Guid IdFiscalia { get; set; }
     }
 }

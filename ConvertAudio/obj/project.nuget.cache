@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "dgSpecHash": "FZ4YnAES9cyeSqrDTVTF7iGsTwpl8P4iv7XHrt8/WxFFP0aHcXKNge994jNj+JYlKhKl7uMtmD1SOO7SuDDD7Q==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Ast\\source\\repos\\MarcoAntonio27C\\NNA\\ConvertAudio\\ConvertAudio.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Ast\\.nuget\\packages\\naudio\\2.1.0\\naudio.2.1.0.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "El paquete \"NAudio 2.1.0\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\" en lugar de la plataforma de destino del proyecto \".NETStandard,Version=v2.1\". Puede que el paquete no sea totalmente compatible con el proyecto.",
+      "libraryId": "NAudio",
+      "targetGraphs": [
+        ".NETStandard,Version=v2.1"
+      ]
+    }
+  ]
+}

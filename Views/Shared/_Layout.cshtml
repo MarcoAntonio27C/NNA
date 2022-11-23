@@ -24,16 +24,60 @@
                     {
                         <h1 class="self-center text-2xl  font-semibold text-gray-600 whitespace-nowrap">Agente Investigador</h1>
                     }
+                    @if (User.IsInRole(("73e08b06-a8c8-4960-9708-d77d4f938f0c").ToString().ToUpper()))
+                    {
+                        <h1 class="self-center text-2xl  font-semibold text-gray-600 whitespace-nowrap">Administrador</h1>
+                    }
                 </div>
                 @*<button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
                         <span class="sr-only">Open main menu</span>
                         <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
                     </button>*@
-                <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+                <div class="hidden w-full  md:block md:w-auto" id="navbar-default">
                     <ul class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                         <li>
-                            <a asp-controller="Home" asp-action="Inicio" class="block py-2 pl-3 pr-4 text-white bg-yellow-700 rounded md:bg-transparent md:text-yellow-700 md:p-0 dark:text-white" aria-current="page">Inicio</a>
+                            @if (User.IsInRole(("49ecfee1-61f3-4e38-a28a-fe74c1bcb02c").ToString().ToUpper()))
+                            {
+                                <a asp-controller="Agente" asp-action="Index" class="block py-2 pl-3 pr-4 text-white bg-yellow-700 rounded md:bg-transparent md:text-yellow-700 md:p-0 dark:text-white" aria-current="page">Inicio</a>
+
+                            }
+                            @if (User.IsInRole(("73e08b06-a8c8-4960-9708-d77d4f938f0c").ToString().ToUpper()))
+                            {
+                                <a asp-controller="Administrador" asp-action="Index" class="block py-2 pl-3 pr-4 text-white bg-yellow-700 rounded md:bg-transparent md:text-yellow-700 md:p-0 dark:text-white" aria-current="page">Inicio</a>
+
+                            }
                         </li>
+
+                        @if (User.IsInRole(("73e08b06-a8c8-4960-9708-d77d4f938f0c").ToString().ToUpper()))
+                        {
+                            <li>
+                                <a asp-controller="Usuarios" asp-action="Index" id="usuarios" data-dropdown-toggle="dropdownNavbar" class="flex relative items-center justify-between w-full py-2 pl-3 pr-4 font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto">Usuarios</a>
+                                <!-- Dropdown menu -->
+                                <div id="menu-usuarios" class="z-10 hidden absolute  font-normal bg-white divide-y divide-gray-100 rounded shadow w-44">
+                                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
+                                        <li>
+                                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Agregar</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li>
+                                <a href="" id="denuncias" data-dropdown-toggle="dropdownNavbar" class="flex relative items-center justify-between w-full py-2 pl-3 pr-4 font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto">Denuncias</a>
+                                <!-- Dropdown menu -->
+                                <div id="menu-denuncias" class="z-10 hidden absolute  font-normal bg-white divide-y divide-gray-100 rounded shadow w-44">
+                                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
+                                        <li>
+                                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Sin Asignar</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Asignadas</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        }
+
                         <li>
                             <a class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent" asp-controller="Acceso" asp-action="Salir">Salir</a>
                         </li>
@@ -44,34 +88,32 @@
 
     </header>
     <div>
-        <main role="main" class="pb-3">
+        <main role="main" class="mb-28">
             @RenderBody()
         </main>
     </div>
 
 
-    <footer class=" bottom-0 left-0 z-20 p-4 w-full bg-white border-t border-gray-200 shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800 dark:border-gray-600">
-        <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">
-            © 2022 <a href="https://flowbite.com/" class="hover:underline">Flowbite™</a>. All Rights Reserved.
-        </span>
-        <ul class="flex flex-wrap items-center mt-3 text-sm text-gray-500 dark:text-gray-400 sm:mt-0">
-            <li>
-                <a href="#" class="mr-4 hover:underline md:mr-6 ">About</a>
-            </li>
-            <li>
-                <a href="#" class="mr-4 hover:underline md:mr-6">Privacy Policy</a>
-            </li>
-            <li>
-                <a href="#" class="mr-4 hover:underline md:mr-6">Licensing</a>
-            </li>
-            <li>
-                <a href="#" class="hover:underline">Contact</a>
-            </li>
-        </ul>
+    <footer class="fixed bottom-0 left-0 z-20 p-4 w-full  bg-gray-50 border-t border-gray-200  ">
+        <div class="grid grid-cols-12 text-center">
+            <div class="col-span-4">
+                @* <img class="w-1/4 mx-auto" src="~/img/Logotipo_institucional_500.png" alt="Alternate Text" />*@
+            </div>
+            <div class="col-span-4 text-sm">
+                <p class=" my-auto font-medium text-yellow-600">Denuncia Niños, Niñas y Adolescentes</p>
+                <p class=" my-auto font-medium text-gray-500">Fiscalía General del Estado de Puebla</p>
+                <p>© 2022 Todos los derechos reservados</p>
+            </div>
+            <div class="col-span-4">
+                @*  <img class="w-1/12 mx-auto" src="~/img/Escudo_Puebla.png" alt="Alternate Text" />*@
+            </div>
+        </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     @*<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>

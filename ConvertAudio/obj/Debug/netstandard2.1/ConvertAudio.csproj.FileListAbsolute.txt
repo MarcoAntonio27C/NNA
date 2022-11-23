@@ -1,0 +1,10 @@
+C:\Users\Ast\source\repos\MarcoAntonio27C\NNA\ConvertAudio\bin\Debug\netstandard2.1\ConvertAudio.deps.json
+C:\Users\Ast\source\repos\MarcoAntonio27C\NNA\ConvertAudio\bin\Debug\netstandard2.1\ConvertAudio.dll
+C:\Users\Ast\source\repos\MarcoAntonio27C\NNA\ConvertAudio\bin\Debug\netstandard2.1\ConvertAudio.pdb
+C:\Users\Ast\source\repos\MarcoAntonio27C\NNA\ConvertAudio\obj\Debug\netstandard2.1\ConvertAudio.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Ast\source\repos\MarcoAntonio27C\NNA\ConvertAudio\obj\Debug\netstandard2.1\ConvertAudio.AssemblyInfoInputs.cache
+C:\Users\Ast\source\repos\MarcoAntonio27C\NNA\ConvertAudio\obj\Debug\netstandard2.1\ConvertAudio.AssemblyInfo.cs
+C:\Users\Ast\source\repos\MarcoAntonio27C\NNA\ConvertAudio\obj\Debug\netstandard2.1\ConvertAudio.csproj.CoreCompileInputs.cache
+C:\Users\Ast\source\repos\MarcoAntonio27C\NNA\ConvertAudio\obj\Debug\netstandard2.1\ConvertAudio.dll
+C:\Users\Ast\source\repos\MarcoAntonio27C\NNA\ConvertAudio\obj\Debug\netstandard2.1\ConvertAudio.pdb
+C:\Users\Ast\source\repos\MarcoAntonio27C\NNA\ConvertAudio\obj\Debug\netstandard2.1\ConvertAudio.csproj.AssemblyReference.cache

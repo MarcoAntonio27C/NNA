@@ -18,6 +18,8 @@ namespace NNAContext
         public DbSet<Caso> Caso { get; set; }
         public DbSet<Denuncia> Denuncia { get; set; }
         public DbSet<Emotion> Emotion { get; set; }
+        public DbSet<Fiscalias> Fiscalias { get; set; }
+        public DbSet<MP> MP { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Usuario>(entity =>
@@ -52,16 +54,31 @@ namespace NNAContext
                 entity.HasKey(e => e.Id);
             });
 
+            modelBuilder.Entity<Fiscalias>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+            });
+
+            modelBuilder.Entity<MP>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+            });
             // ROLES
-            modelBuilder.Entity<Roles>().HasData(new Roles { Id = new Guid("49ecfee1-61f3-4e38-a28a-fe74c1bcb02c"), Nombre = "ASESOR", Descripcion = "ENCARGADO DE ASIGNAR LAS DENUNCIAS RECIBIDAS", Estatus = true });
+            modelBuilder.Entity<Roles>().HasData(new Roles { Id = new Guid("73e08b06-a8c8-4960-9708-d77d4f938f0c"), Nombre = "ADMINISTRADOR", Descripcion = "ADMINISTRADOR DEL SISTEMA, TIENE ACCESO A TODO", Estatus = true });
+            modelBuilder.Entity<Roles>().HasData(new Roles { Id = new Guid("49ecfee1-61f3-4e38-a28a-fe74c1bcb02c"), Nombre = "AGENTE INVESTIGADOR", Descripcion = "ENCARGADO DE ASIGNAR LAS DENUNCIAS RECIBIDAS", Estatus = true });
             modelBuilder.Entity<Roles>().HasData(new Roles { Id = new Guid("6f1be536-c224-4f31-914e-c9d00cce1eb9"), Nombre = "MP", Descripcion = "AGENTE DEL MINISTERIO PUBLICO", Estatus = true });
 
             //USUARIOS
-            modelBuilder.Entity<Usuario>().HasData(new Usuario { Id = new Guid("542ac5f1-da0f-4454-9700-defa2d131b9d"), Correo = "marco_antonio.cantero@fiscalia.puebla.gob.mx", Contraseña = "123qwe", IdRol = new Guid("49ecfee1-61f3-4e38-a28a-fe74c1bcb02c"), Estatus = true });
+            modelBuilder.Entity<Usuario>().HasData(new Usuario { Id = new Guid("1e28ad5c-8897-4f35-846e-beaede16b3b0"),Nombre="Administrador", Correo = "admin@fiscalia.puebla.gob.mx", Contraseña = "123qwe", IdRol = new Guid("73e08b06-a8c8-4960-9708-d77d4f938f0c"), IdFiscalia = new Guid("f54fd0d9-be76-4c38-b7ed-edeb6f4c9939"), Estatus = true });
+            modelBuilder.Entity<Usuario>().HasData(new Usuario { Id = new Guid("542ac5f1-da0f-4454-9700-defa2d131b9d"),Nombre="Marco Antonio", Correo = "marco_antonio.cantero@fiscalia.puebla.gob.mx", Contraseña = "123qwe", IdRol = new Guid("49ecfee1-61f3-4e38-a28a-fe74c1bcb02c"), IdFiscalia = new Guid("f54fd0d9-be76-4c38-b7ed-edeb6f4c9939"), Estatus = true });
 
             //CASO
             modelBuilder.Entity<Caso>().HasData(new Caso { Id = 1, Nombre = "Niños y Niñas" });
             modelBuilder.Entity<Caso>().HasData(new Caso { Id = 2, Nombre = "Adolescentes" });
+
+            //FISCALIA
+            modelBuilder.Entity<Fiscalias>().HasData(new Fiscalias { Id = new Guid("f54fd0d9-be76-4c38-b7ed-edeb6f4c9939"), Nombre = "NONE", Acronimo = "NONE",Status = true });
+
 
             //EMOCIONES 
             modelBuilder.Entity<Emotion>().HasData(new Emotion { Id = 1, Nombre = "BIEN" });

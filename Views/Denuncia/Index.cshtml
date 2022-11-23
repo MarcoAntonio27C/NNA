@@ -1,9 +1,37 @@
-﻿
+﻿@using Modelos;
 
-<div class="container overflow-x-auto relative  mx-auto ">
+@{
+    Denuncia denuncia = (Denuncia)ViewData["denuncia"];
+    string audio = ViewData["audio"].ToString();
+    string tipo = "Niños y Niñas";
+
+    var emocion = ViewData["emocion"];
+    var action = ViewData["action"];
+
+    if (denuncia.IdCaso.Equals(2)) { tipo = "Adolescentes"; };
+
+    string fotografia = "";
+    string imgSrc = "";
+    string audioSrc = "";
+
+    if (denuncia.Photo != null)
+    {
+        fotografia = Convert.ToBase64String(denuncia.Photo);
+        imgSrc = String.Format("data:image/png;base64,{0}", fotografia);
+    }
+
+    if (!audio.Equals(""))
+    {
+
+        audioSrc = String.Format("data:audio/acc;base64,{0}", audio);
+    }
+}
+
+
+<div class="container overflow-y-auto  mx-auto ">
 
     <div class="rounded-lg mt-3 text-center text-2xl bg-yellow-600 text-white font-bold py-5">
-        DENUNCIA NUMERO 0000001
+        DENUNCIA @denuncia.Folio.ToString("D8")
     </div>
 
     <div class=" bg-gray-200 mt-9 overflow-x-auto  shadow-md sm:rounded-lg">
@@ -11,110 +39,133 @@
 
             <h1 class="text-center text-2xl font-bold my-4">Información General</h1>
 
-                <div class="flex">
+            <div class="flex">
 
-                    <div class="w-3/4 px-4">
+                <div class="w-3/4 px-4">
 
-                        <div class="grid grid-cols-12">
-                            <div class="col-span-3">
-                                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Folio</label>
-                                <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" placeholder="00000001" required>
-                            </div>
-                            <div class="col-span-3 px-4">
-                                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo de Denuncia</label>
-                                <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" placeholder="Niños y Niñas" required>
-                            </div>
-                            <div class="col-span-3">
-                                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-800 ">Fecha de Denuncia</label>
-                                <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5 " value="@DateTime.Now.ToString()">
-                            </div>
-                            <div class="col-span-3 px-4">
-                                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Municipio</label>
-                                <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" value="Puebla" required>
-                            </div>
+                    <div class="grid grid-cols-12">
+                        <div class="col-span-3">
+                            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Folio</label>
+                            <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" value="@denuncia.Folio.ToString("D8")" required>
                         </div>
-
-                        <div class="grid grid-cols-12 my-4">
-                            <div class="col-span-7">
-                                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre Completo</label>
-                                <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" placeholder="Niños y Niñas" required>
-                            </div>
-                            <div class="col-span-2 px-2">
-                                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-800 ">Edad</label>
-                                <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5 " value="8 años">
-                            </div>
-                            <div class="col-span-3 px-4">
-                                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-800 ">Telefono</label>
-                                <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5 " value="2228953324">
-                            </div>
+                        <div class="col-span-3 px-4">
+                            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo de Denuncia</label>
+                            <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" value="@tipo" required>
                         </div>
+                        <div class="col-span-3">
+                            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-800 ">Fecha de Denuncia</label>
+                            <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5 " value="@denuncia.Fecha.ToString("D")">
+                        </div>
+                        <div class="col-span-3 px-4">
+                            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Municipio</label>
+                            <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" value="@denuncia.Municipio" required>
+                        </div>
+                    </div>
 
+                    <div class="grid grid-cols-12 my-4">
+                        <div class="col-span-7">
+                            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre Completo</label>
+                            <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" value="@denuncia.Nombre" required>
+                        </div>
+                        <div class="col-span-2 px-2">
+                            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-800 ">Edad</label>
+                            <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5 " value="@denuncia.Edad">
+                        </div>
+                        <div class="col-span-3 px-4">
+                            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-800 ">Telefono</label>
+                            <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5 " value="@denuncia.Edad">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-12 mt-4">
+                        <div class="col-span-4">
+                            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Persona de Confianza</label>
+                            <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" value="@denuncia.ParentsName" required>
+                        </div>
+                        <div class="col-span-4 px-4">
+                            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Escuela</label>
+                            <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" value="@denuncia.Escuela" required>
+                        </div>
+                        <div class="col-span-4 px-4">
+                            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-800 ">Casa</label>
+                            <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5 " value="@denuncia.Casa">
+                        </div>
+                    </div>
+                    @if (denuncia.IdCaso == 1)
+                    {
                         <div class="grid grid-cols-12 mt-4">
                             <div class="col-span-4">
-                                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Persona de Confianza</label>
-                                <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" value="Puebla" required>
+                                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Estado de Animo</label>
+                                <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" value="@emocion" required>
                             </div>
-                            <div class="col-span-4 px-4">
-                                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Escuela</label>
-                                <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" placeholder="Niños y Niñas" required>
+                            <div class="col-span-8 px-4">
+                                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Comenta:</label>
+                                <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" value="@action" required>
                             </div>
-                            <div class="col-span-4 px-4">
-                                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-800 ">Casa</label>
-                                <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5 " value="8 años">
-                            </div>
-
                         </div>
+                    }
 
-                    </div>
-                    <div class="w-1/4">
-                        <div>
-                            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-800 ">Fotografia</label>
-                            <img src="~/img/AvatarD.png" alt="Alternate Text" />
-                        </div>
+
+                </div>
+                <div class="w-1/4">
+                    <div>
+                        <label for="first_name" class="block mb-2 text-sm font-medium text-gray-800 ">Fotografia</label>
+                        @if (denuncia.Photo != null)
+                        {
+                            <img class="w-3/5" src="@imgSrc" alt="" />
+                        }
+                        else
+                        {
+                            <img class="w-3/5" src="~/img/sin_foto.jpg" alt="" />
+                        }
 
                     </div>
                 </div>
+            </div>
 
 
 
-                <h1 class="text-center text-2xl font-bold my-4">Denuncia</h1>
-                <div class=" grid grid-cols-12 mt-4">
+            <h1 class="text-center text-2xl font-bold my-4">Denuncia</h1>
+            <div class=" grid grid-cols-12 mt-4">
 
-                    <div class="col-span-6 pt-12 px-4">
-                        <div>
-                            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-800 ">Relato</label>
-                            <textarea id="w3review" name="w3review" rows="10" cols="50" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5 ">At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.</textarea>
-                        </div>
-
-                        <div class="mt-3">
-                            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-800 ">Audio</label>
-                            <audio class="block w-full" controls>
-                                <source src="horse.ogg" type="audio/ogg">
-                                <source src="horse.mp3" type="audio/mpeg">
-                                Your browser does not support the audio element.
-                            </audio>
-                        </div>
+                <div class="col-span-6 pt-12 px-4">
+                    <div>
+                        <label for="first_name" class="block mb-2 text-sm font-medium text-gray-800 ">Relato</label>
+                        <textarea readonly id="w3review" name="w3review" rows="13" cols="50" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5 ">@denuncia.Evento</textarea>
                     </div>
 
-                    <div class="col-span-6 pt-6 px-4">
-                        <div class="">
-                            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-800 ">Lugar de la Denuncia</label>
-                            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-800 ">Avenida Filomeno Escamilla 233, Infonavit Manuel Rivera Anaya, Puebla, Puebla, Mexico</label>
-                            <div class="block w-full h-80" id="map">
-
-                            </div>
-                        </div>
+                    <div class="mt-3">
+                        <label for="first_name" class="block mb-2 text-sm font-medium text-gray-800 ">Audio</label>
+                        <audio class="block w-full" controls>
+                            <source src="@audioSrc" type="audio/ogg; codecs=vorbis" />
+                            Your browser does not support the audio element.
+                        </audio>
                     </div>
-
                 </div>
 
+                <div class="col-span-6 pt-6 px-4">
+                    <div class="">
+                        <label for="first_name" class="block mb-2 text-sm font-medium text-gray-800 ">Lugar de la Denuncia</label>
+                        <label for="first_name" class="block mb-2 text-sm font-medium text-gray-800 ">@denuncia.PlaceName</label>
+                        <div class="block w-full h-80" id="map">
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
 
 
-                @*<button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>*@
+
+            @*<button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>*@
         </form>
     </div>
 
 </div>
+
+
+
+
 @section Scripts{
 
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1Cq_73I51TlW3q_CqYZJz7dHcCY6B_kQ&libraries=visualization&callback=initMap" type="text/javascript"></script>
@@ -123,11 +174,11 @@
         var map;
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
-                center: { lat: 19.030981666666666, lng: -98.20218666666666 },
+                center: { lat: @denuncia.Latitud, lng: @denuncia.Longitud },
                 zoom: 10,
             });
             var marker = new google.maps.Marker({
-                position: { lat: 19.030981666666666, lng: -98.20218666666666 },
+                position: { lat: @denuncia.Latitud, lng: @denuncia.Longitud },
                 map: map,
                 title: ''
             });

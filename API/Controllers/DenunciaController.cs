@@ -4,6 +4,7 @@ using NNAContext;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
 
@@ -28,8 +29,16 @@ namespace API.Controllers
             denuncia.Id = Id;
             denuncia.Fecha = DateTime.Now;
 
+
+
+
             _context.Denuncia.Add(denuncia);
             var x = await _context.SaveChangesAsync();
+
+            //var insert = await _context.Denuncia.FindAsync(denuncia.Id);
+            //insert.NumeroDenuncia = "FGE/AppNNA/" + insert.Folio.ToString("D6") + "/" + DateTime.Now.Year;
+            //_context.Entry(insert).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            //x = await _context.SaveChangesAsync();
 
             if (x > 0)
             {
