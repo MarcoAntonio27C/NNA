@@ -14,11 +14,10 @@
     string imgSrc = "";
     string audioSrc = "";
 
-    if (denuncia.Photo != null)
-    {
-        fotografia = Convert.ToBase64String(denuncia.Photo);
-        imgSrc = String.Format("data:image/png;base64,{0}", fotografia);
-    }
+
+    fotografia = Convert.ToBase64String(denuncia.Photo);
+    imgSrc = String.Format("data:image/png;base64,{0}", fotografia);
+
 
     if (!audio.Equals(""))
     {
@@ -73,7 +72,7 @@
                         </div>
                         <div class="col-span-3 px-4">
                             <label for="first_name" class="block mb-2 text-sm font-medium text-gray-800 ">Telefono</label>
-                            <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5 " value="@denuncia.Edad">
+                            <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5 " value="@denuncia.Telefono">
                         </div>
                     </div>
 
@@ -91,32 +90,17 @@
                             <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5 " value="@denuncia.Casa">
                         </div>
                     </div>
-                    @if (denuncia.IdCaso == 1)
-                    {
-                        <div class="grid grid-cols-12 mt-4">
-                            <div class="col-span-4">
-                                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Estado de Animo</label>
-                                <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" value="@emocion" required>
-                            </div>
-                            <div class="col-span-8 px-4">
-                                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Comenta:</label>
-                                <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" value="@action" required>
-                            </div>
-                        </div>
-                    }
-
-
                 </div>
                 <div class="w-1/4">
                     <div>
                         <label for="first_name" class="block mb-2 text-sm font-medium text-gray-800 ">Fotografia</label>
-                        @if (denuncia.Photo != null)
+                        @if (!Convert.ToBase64String(denuncia.Photo).Equals(""))
                         {
-                            <img class="w-3/5" src="@imgSrc" alt="" />
+                            <img class="w-3/5 border border-yellow-600 rounded-lg" src="@imgSrc" alt="" />
                         }
                         else
                         {
-                            <img class="w-3/5" src="~/img/sin_foto.jpg" alt="" />
+                            <img class="w-3/5 border border-yellow-600 rounded-lg" src="~/img/sin_foto.jpg" alt="" />
                         }
 
                     </div>
@@ -126,6 +110,20 @@
 
 
             <h1 class="text-center text-2xl font-bold my-4">Denuncia</h1>
+
+            @if (denuncia.IdCaso == 1)
+            {
+                <div class="grid grid-cols-12 mt-4 mx-4">
+                    <div class="col-span-4">
+                        <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Estado de Animo</label>
+                        <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" value="@emocion" required>
+                    </div>
+                    <div class="col-span-8 px-4">
+                        <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parece que:</label>
+                        <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" value="@action.ToString().ToUpper()" required>
+                    </div>
+                </div>
+            }
             <div class=" grid grid-cols-12 mt-4">
 
                 <div class="col-span-6 pt-12 px-4">

@@ -17,12 +17,12 @@ $(document).ready(function () {
             $.ajax({
                 type: 'POST',
                 
-                url: '/Acceso/validar',
+                url: './Acceso/validar',
                 data: { correo: mail, password : pass },
                 success: function (response) {
                     if (response === 'true') {
                         //alert("Acceso Correcto");
-                        $(location).attr('href', '../Home/Index')
+                        $(location).attr('href', './Home/Index')
                     } else {
                         $("#alert-4").show();
                         $("#incorrectos").show();

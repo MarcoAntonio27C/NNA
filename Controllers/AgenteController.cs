@@ -18,7 +18,7 @@ namespace NNA.Controllers
         }
         public async Task<IActionResult> IndexAsync()
         {
-            var denuncias = await _Context.Denuncia.Where(x => x.Asignada.Equals(false)).ToListAsync();
+            var denuncias = await _Context.Denuncia.Where(x => x.Asignada.Equals(false)).OrderBy(x => x.Folio).ToListAsync();
             ViewData["denuncias"] = denuncias;
             return View();
         }

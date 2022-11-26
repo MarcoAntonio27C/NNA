@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Modelos.Data;
+using Modelos;
+using NNA.Models.Forms;
 
 namespace NNA.Controllers
 {
@@ -39,31 +41,28 @@ namespace NNA.Controllers
             return View();
         }
 
-        // GET: UsuariosController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+
 
         // GET: UsuariosController/Create
-        public ActionResult Create()
+        public async Task<ActionResult> CreateAsync()
         {
+            List<Roles> roles = await _Context.Roles.OrderBy(x => x.Nombre).ToListAsync();
+            List<Fiscalias> fiscalias = await _Context.Fiscalias.OrderBy(x => x.Nombre).ToListAsync();
+
+            ViewData["roles"] = roles;
+            ViewData["fiscalias"] = fiscalias;
             return View();
         }
 
-        // POST: UsuariosController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<string> CreateAsync(FormUser form)
         {
-            try
+            if(await _Context.Usuario.Where(x => x.Correo.Equals(form.Correo)).CountAsync() == 0)
             {
-                return RedirectToAction(nameof(IndexAsync));
+                return form.Nombre;
             }
-            catch
-            {
-                return View();
-            }
+
+            return "duplicate";
         }
 
         // GET: UsuariosController/Edit/5

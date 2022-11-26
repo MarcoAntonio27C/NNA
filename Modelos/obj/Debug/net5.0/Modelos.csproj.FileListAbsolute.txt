@@ -2,6 +2,7 @@ C:\Users\Ast\source\repos\MarcoAntonio27C\NNA\Modelos\bin\Debug\net5.0\Modelos.d
 C:\Users\Ast\source\repos\MarcoAntonio27C\NNA\Modelos\bin\Debug\net5.0\Modelos.dll
 C:\Users\Ast\source\repos\MarcoAntonio27C\NNA\Modelos\bin\Debug\net5.0\ref\Modelos.dll
 C:\Users\Ast\source\repos\MarcoAntonio27C\NNA\Modelos\bin\Debug\net5.0\Modelos.pdb
+C:\Users\Ast\source\repos\MarcoAntonio27C\NNA\Modelos\obj\Debug\net5.0\Modelos.csproj.AssemblyReference.cache
 C:\Users\Ast\source\repos\MarcoAntonio27C\NNA\Modelos\obj\Debug\net5.0\Modelos.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Ast\source\repos\MarcoAntonio27C\NNA\Modelos\obj\Debug\net5.0\Modelos.AssemblyInfoInputs.cache
 C:\Users\Ast\source\repos\MarcoAntonio27C\NNA\Modelos\obj\Debug\net5.0\Modelos.AssemblyInfo.cs
@@ -9,4 +10,3 @@ C:\Users\Ast\source\repos\MarcoAntonio27C\NNA\Modelos\obj\Debug\net5.0\Modelos.c
 C:\Users\Ast\source\repos\MarcoAntonio27C\NNA\Modelos\obj\Debug\net5.0\Modelos.dll
 C:\Users\Ast\source\repos\MarcoAntonio27C\NNA\Modelos\obj\Debug\net5.0\ref\Modelos.dll
 C:\Users\Ast\source\repos\MarcoAntonio27C\NNA\Modelos\obj\Debug\net5.0\Modelos.pdb
-C:\Users\Ast\source\repos\MarcoAntonio27C\NNA\Modelos\obj\Debug\net5.0\Modelos.csproj.AssemblyReference.cache

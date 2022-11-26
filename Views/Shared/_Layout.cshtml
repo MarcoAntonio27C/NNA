@@ -24,10 +24,6 @@
                     {
                         <h1 class="self-center text-2xl  font-semibold text-gray-600 whitespace-nowrap">Agente Investigador</h1>
                     }
-                    @if (User.IsInRole(("73e08b06-a8c8-4960-9708-d77d4f938f0c").ToString().ToUpper()))
-                    {
-                        <h1 class="self-center text-2xl  font-semibold text-gray-600 whitespace-nowrap">Administrador</h1>
-                    }
                 </div>
                 @*<button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
                         <span class="sr-only">Open main menu</span>
@@ -56,7 +52,7 @@
                                 <div id="menu-usuarios" class="z-10 hidden absolute  font-normal bg-white divide-y divide-gray-100 rounded shadow w-44">
                                     <ul class="py-1 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
                                         <li>
-                                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Agregar</a>
+                                            <a asp-controller="Usuarios" asp-action="create" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Agregar</a>
                                         </li>
                                     </ul>
                                 </div>

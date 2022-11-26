@@ -54,27 +54,31 @@ namespace NNA.Controllers
         public string GetAudio(Denuncia denuncia)
         {
 
-
-            //var routeFTP = "ftp://10.24.1.13/2022/2/4/fe27d57e-bf9d-49e4-8928-d3f8ed58fb24/video.txt";
-            //var routeFTP = "ftp://10.24.1.29/audio.txt";
-            var routeFTP = denuncia.EventoRecord;
-            var response = "";
-
-            WebClient request = new();
-
-            request.Credentials = new NetworkCredential("anonymous", "elihu.cortes@fiscalia.puebla.gob.mx");
-
-            try
+            if(denuncia.EventoRecord != null)
             {
-                var newFileData = request.DownloadData(new Uri(routeFTP));
-                response = Encoding.UTF8.GetString(newFileData);
-            }
-            catch (WebException e)
-            {
+                //var routeFTP = "ftp://10.24.1.13/2022/2/4/fe27d57e-bf9d-49e4-8928-d3f8ed58fb24/video.txt";
+                //var routeFTP = "ftp://10.24.1.29/audio.txt";
+                var routeFTP = denuncia.EventoRecord;
+                var response = "";
 
+                WebClient request = new();
+
+                request.Credentials = new NetworkCredential("anonymous", "elihu.cortes@fiscalia.puebla.gob.mx");
+
+                try
+                {
+                    var newFileData = request.DownloadData(new Uri(routeFTP));
+                    response = Encoding.UTF8.GetString(newFileData);
+                }
+                catch (WebException e)
+                {
+
+                }
+
+                return response;
             }
 
-            return response;
+            return "";
 
         }
     }
