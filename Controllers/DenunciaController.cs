@@ -12,8 +12,7 @@ using System.Net;
 using System.Text;
 using System.IO;
 using Microsoft.AspNetCore.Authorization;
-
-
+using Modelos.Data;
 
 namespace NNA.Controllers
 {
@@ -30,6 +29,7 @@ namespace NNA.Controllers
         public async Task<IActionResult> IndexAsync(string id)
         {
             var denuncia = await _Context.Denuncia.FindAsync(Guid.Parse(id));
+            var mp = await GetAgentesAsync();
             string emocion = "";
             string action = "";
 
@@ -41,16 +41,32 @@ namespace NNA.Controllers
                 action = y.Descripcion;
             }
            
+
             var audio = GetAudio(denuncia);
             ViewData["denuncia"] = denuncia;
             ViewData["emocion"] = emocion;
             ViewData["action"] = action;
             ViewData["audio"] = audio;
+            ViewData["mp"] = mp;
 
             return View();
         }
 
+        public async Task<List<DataMP>> GetAgentesAsync()
+        {
+            List<DataMP> agentes = await _Context.MP.Where(x => x.Estatus.Equals(true))
+                .Join(_Context.Unidades, agente => agente.IdUnidad, unidad => unidad.Id, (agente, unidad) => new { agente, unidad })
+                .Join(_Context.Fiscalias, join1 => join1.unidad.IdFiscalia, fiscalia => fiscalia.Id, (join1, fiscalia) => new DataMP
+                {
+                    Id = join1.agente.Id.ToString(),
+                    Unidad = join1.unidad.Nombre,
+                    NombreCompleto = join1.agente.ApellidoPaterno+" "+join1.agente.ApellidoMaterno + " " + join1.agente.Nombre+ " - "+ join1.unidad.Nombre,
+                    Fiscalia = fiscalia.Acronimo,
+                    Estatus = join1.agente.Estatus.ToString(),
+                }).ToListAsync();
 
+            return agentes;
+        }
         public string GetAudio(Denuncia denuncia)
         {
 
@@ -81,5 +97,21 @@ namespace NNA.Controllers
             return "";
 
         }
+
+        public async Task<string> AsignarAsync(string mp, string IdDenuncia)
+        {
+            var denuncia = await _Context.Denuncia.FindAsync(Guid.Parse(IdDenuncia));
+
+            denuncia.Asignada = true;
+            denuncia.IdMp = Guid.Parse(mp);
+
+            _Context.Entry(denuncia).State = EntityState.Modified;
+            var x = await _Context.SaveChangesAsync();
+
+            return x.ToString();
+
+        }
+
+
     }
 }

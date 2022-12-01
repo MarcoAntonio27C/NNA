@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using NNAContext;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,18 +9,79 @@ namespace NNA.Controllers
 {
     public class AgenteController : Controller
     {
-        private readonly NNA_Context _Context;
-
-        public AgenteController(NNA_Context context)
+        // GET: AgenteController
+        public ActionResult Index()
         {
-            _Context = context;
-        }
-        public async Task<IActionResult> IndexAsync()
-        {
-            var denuncias = await _Context.Denuncia.Where(x => x.Asignada.Equals(false)).OrderBy(x => x.Folio).ToListAsync();
-            ViewData["denuncias"] = denuncias;
             return View();
         }
-    }
 
+        // GET: AgenteController/Details/5
+        public ActionResult Details(int id)
+        {
+            return View();
+        }
+
+        // GET: AgenteController/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: AgenteController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(IFormCollection collection)
+        {
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: AgenteController/Edit/5
+        public ActionResult Edit(int id)
+        {
+            return View();
+        }
+
+        // POST: AgenteController/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, IFormCollection collection)
+        {
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: AgenteController/Delete/5
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+        // POST: AgenteController/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, IFormCollection collection)
+        {
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+    }
 }

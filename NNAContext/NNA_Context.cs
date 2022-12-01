@@ -20,6 +20,7 @@ namespace NNAContext
         public DbSet<Emotion> Emotion { get; set; }
         public DbSet<Fiscalias> Fiscalias { get; set; }
         public DbSet<MP> MP { get; set; }
+        public DbSet<Unidades> Unidades { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Usuario>(entity =>
@@ -63,21 +64,31 @@ namespace NNAContext
             {
                 entity.HasKey(e => e.Id);
             });
+
+            modelBuilder.Entity<Unidades>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+            });
             // ROLES
-            modelBuilder.Entity<Roles>().HasData(new Roles { Id = new Guid("73e08b06-a8c8-4960-9708-d77d4f938f0c"), Nombre = "ROOT", Descripcion = "ADMINISTRADOR DEL SISTEMA, TIENE ACCESO A TODO", Estatus = true });
-            modelBuilder.Entity<Roles>().HasData(new Roles { Id = new Guid("49ecfee1-61f3-4e38-a28a-fe74c1bcb02c"), Nombre = "ADMINISTRADOR", Descripcion = "ENCARGADO DE ASIGNAR LAS DENUNCIAS RECIBIDAS", Estatus = true });
-            modelBuilder.Entity<Roles>().HasData(new Roles { Id = new Guid("6f1be536-c224-4f31-914e-c9d00cce1eb9"), Nombre = "MP", Descripcion = "AGENTE DEL MINISTERIO PUBLICO", Estatus = true });
+            modelBuilder.Entity<Roles>().HasData(new Roles { Id = new Guid("73e08b06-a8c8-4960-9708-d77d4f938f0c"), Nombre = "ADMINISTRADOR", Descripcion = "ADMINISTRADOR DEL SISTEMA, TIENE ACCESO A TODO", Estatus = true });
+            modelBuilder.Entity<Roles>().HasData(new Roles { Id = new Guid("49ecfee1-61f3-4e38-a28a-fe74c1bcb02c"), Nombre = "FISCALIA ESPECIALIZADA", Descripcion = "ENCARGADO DE VER Y ASIGNAR LAS DENUNCIAS RECIBIDAS", Estatus = true });
+            modelBuilder.Entity<Roles>().HasData(new Roles { Id = new Guid("aec4592c-fe97-47d0-97d2-1933fd2da4b9"), Nombre = "TITULAR DE UNIDAD", Descripcion = "PUEDE VER TODAS LAS DENUNCIAS DE SUS AGENTES DEL MINISTERIO PUBLICO", Estatus = true });
+            modelBuilder.Entity<Roles>().HasData(new Roles { Id = new Guid("6f1be536-c224-4f31-914e-c9d00cce1eb9"), Nombre = "AGENTE DEL MINISTERIO PUBLICO", Descripcion = "AGENTE DEL MINISTERIO PUBLICO", Estatus = true });
 
             //USUARIOS
-            modelBuilder.Entity<Usuario>().HasData(new Usuario { Id = new Guid("1e28ad5c-8897-4f35-846e-beaede16b3b0"),Nombre="Administrador", Correo = "root@fiscalia.puebla.gob.mx", Contraseña = "123qwe", IdRol = new Guid("73e08b06-a8c8-4960-9708-d77d4f938f0c"), IdFiscalia = new Guid("f54fd0d9-be76-4c38-b7ed-edeb6f4c9939"), Estatus = true });
-            modelBuilder.Entity<Usuario>().HasData(new Usuario { Id = new Guid("542ac5f1-da0f-4454-9700-defa2d131b9d"),Nombre="Marco Antonio", Correo = "marco_antonio.cantero@fiscalia.puebla.gob.mx", Contraseña = "123qwe", IdRol = new Guid("49ecfee1-61f3-4e38-a28a-fe74c1bcb02c"), IdFiscalia = new Guid("f54fd0d9-be76-4c38-b7ed-edeb6f4c9939"), Estatus = true });
+            modelBuilder.Entity<Usuario>().HasData(new Usuario { Id = new Guid("1e28ad5c-8897-4f35-846e-beaede16b3b0"),Nombre="Administrador", Correo = "root@fiscalia.puebla.gob.mx", Contraseña = "123qwe", IdRol = new Guid("73e08b06-a8c8-4960-9708-d77d4f938f0c"), IdFiscalia = new Guid("f54fd0d9-be76-4c38-b7ed-edeb6f4c9939"),IdUnidad = new Guid("1d02eda0-a6b8-4c08-9888-e61db604ecf0"), Estatus = true });
 
             //CASO
             modelBuilder.Entity<Caso>().HasData(new Caso { Id = 1, Nombre = "Niños y Niñas" });
             modelBuilder.Entity<Caso>().HasData(new Caso { Id = 2, Nombre = "Adolescentes" });
 
             //FISCALIA
-            modelBuilder.Entity<Fiscalias>().HasData(new Fiscalias { Id = new Guid("f54fd0d9-be76-4c38-b7ed-edeb6f4c9939"), Nombre = "NONE", Acronimo = "NONE",Status = true });
+            modelBuilder.Entity<Fiscalias>().HasData(new Fiscalias { Id = new Guid("f54fd0d9-be76-4c38-b7ed-edeb6f4c9939"), Nombre = " NONE", Acronimo = "NONE",Estatus = true });
+            modelBuilder.Entity<Fiscalias>().HasData(new Fiscalias { Id = new Guid("30df8b24-2f67-49c1-922d-0b1fb219aef9"), Nombre = "Fiscalía Especializada en Investigación de Delitos de Violencia de Género Contra las Mujeres", Acronimo = "FEIDVGM", Estatus = true });
+
+            //UNIDADES
+            modelBuilder.Entity<Unidades>().HasData(new Unidades { Id = new Guid("1d02eda0-a6b8-4c08-9888-e61db604ecf0"), Nombre = " NONE",  Estatus = true, IdFiscalia = new Guid("f54fd0d9-be76-4c38-b7ed-edeb6f4c9939") });
+            modelBuilder.Entity<Unidades>().HasData(new Unidades { Id = new Guid("e13f9fdb-f883-4a0f-b1d5-66ce02249944"), Nombre = "UNIDAD ESPECIALIZADA EN INVESTIGACION DE DELITOS SEXUALES Y CIBERACOSO",  Estatus = true, IdFiscalia = new Guid("30df8b24-2f67-49c1-922d-0b1fb219aef9") });
 
 
             //EMOCIONES 

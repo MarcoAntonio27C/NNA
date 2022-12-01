@@ -13,7 +13,8 @@ namespace Modelos
         public string ApellidoPaterno { get; set; }
         public string ApellidoMaterno { get; set; }
         public DateTime AltaSistema { get; set; }
-        public Guid IdFiscalia { get; set; }
+        public bool Estatus { get; set; }
+        public Guid IdUnidad { get; set; }
         public Guid IdUsuario { get; set; }
     }
 }

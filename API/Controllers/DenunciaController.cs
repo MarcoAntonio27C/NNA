@@ -147,6 +147,10 @@ namespace API.Controllers
             _context.Denuncia.Add(denuncia);
             var x = await _context.SaveChangesAsync();
 
+            var AddExpediente = await _context.Denuncia.FindAsync(denuncia.Id);
+            AddExpediente.Expediente = "FGEP/AppNNA/FEIDVGM/"+AddExpediente.Folio+"/"+DateTime.Now.Year;
+            _context.Entry(AddExpediente).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
 
 
             if (x > 0)

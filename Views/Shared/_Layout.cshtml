@@ -19,11 +19,23 @@
                     <img src="~/img/Logo.png" class="h-12 mr-3 sm:h-12" alt="Fiscalia General del Estado de Puebla" />
                     <span class="self-center text-xl font-semibold text-yellow-600 whitespace-nowrap">Denuncias NNA</span>
                 </a>
-                <div>
-                    @if (User.IsInRole(("49ecfee1-61f3-4e38-a28a-fe74c1bcb02c").ToString().ToUpper()))
+                <div class="text-center">
+                    <h1 class="self-center text-xl  font-semibold text-gray-600 whitespace-nowrap">Fiscalía General del Estado de Puebla</h1>
+                    <h1 class="self-center text-lg  font-semibold text-gray-600 whitespace-nowrap">Fiscalía Especializada en Investigación de Delitos de Violencia de Género Contra las Mujeres</h1>
+                    @if (User.IsInRole(("49ecfee1-61f3-4e38-a28a-fe74c1bcb02c").ToString().ToUpper()))  // Admin Fiscalia Especializada
                     {
-                        <h1 class="self-center text-2xl  font-semibold text-gray-600 whitespace-nowrap">Agente Investigador</h1>
+                        <h1 class="self-center text-base  font-semibold text-gray-600 whitespace-nowrap">Administrador</h1>
                     }
+
+                    @if (User.IsInRole(("AEC4592C-FE97-47D0-97D2-1933FD2DA4B9").ToString().ToUpper()))  // Titular de Unidad
+                    {
+                        <h1 class="self-center text-base  font-semibold text-gray-600 whitespace-nowrap">Titular de Unidad</h1>
+                    }
+                    @if (User.IsInRole(("6F1BE536-C224-4F31-914E-C9D00CCE1EB9").ToString().ToUpper()))  // Agente del Ministerio Publico
+                    {
+                        <h1 class="self-center text-base  font-semibold text-gray-600 whitespace-nowrap">Agente del Ministerio Publico</h1>
+                    }
+
                 </div>
                 @*<button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
                         <span class="sr-only">Open main menu</span>
@@ -34,7 +46,7 @@
                         <li>
                             @if (User.IsInRole(("49ecfee1-61f3-4e38-a28a-fe74c1bcb02c").ToString().ToUpper()))
                             {
-                                <a asp-controller="Agente" asp-action="Index" class="block py-2 pl-3 pr-4 text-white bg-yellow-700 rounded md:bg-transparent md:text-yellow-700 md:p-0 dark:text-white" aria-current="page">Inicio</a>
+                                <a asp-controller="Fiscalia" asp-action="Index" class="block py-2 pl-3 pr-4 text-white bg-yellow-700 rounded md:bg-transparent md:text-yellow-700 md:p-0 dark:text-white" aria-current="page">Inicio</a>
 
                             }
                             @if (User.IsInRole(("73e08b06-a8c8-4960-9708-d77d4f938f0c").ToString().ToUpper()))

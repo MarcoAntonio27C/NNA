@@ -17,5 +17,6 @@ namespace Modelos.Acceso
         public bool Estatus { get; set; }
         public Guid IdRol { get; set; }
         public Guid IdFiscalia { get; set; }
+        public Guid IdUnidad { get; set; }
     }
 }

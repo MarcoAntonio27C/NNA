@@ -49,16 +49,23 @@ namespace NNAContext.Migrations
                         new
                         {
                             Id = new Guid("49ecfee1-61f3-4e38-a28a-fe74c1bcb02c"),
-                            Descripcion = "ENCARGADO DE ASIGNAR LAS DENUNCIAS RECIBIDAS",
+                            Descripcion = "ENCARGADO DE VER Y ASIGNAR LAS DENUNCIAS RECIBIDAS",
                             Estatus = true,
-                            Nombre = "AGENTE INVESTIGADOR"
+                            Nombre = "FISCALIA ESPECIALIZADA"
+                        },
+                        new
+                        {
+                            Id = new Guid("aec4592c-fe97-47d0-97d2-1933fd2da4b9"),
+                            Descripcion = "PUEDE VER TODAS LAS DENUNCIAS DE SUS AGENTES DEL MINISTERIO PUBLICO",
+                            Estatus = true,
+                            Nombre = "TITULAR DE UNIDAD"
                         },
                         new
                         {
                             Id = new Guid("6f1be536-c224-4f31-914e-c9d00cce1eb9"),
                             Descripcion = "AGENTE DEL MINISTERIO PUBLICO",
                             Estatus = true,
-                            Nombre = "MP"
+                            Nombre = "AGENTE DEL MINISTERIO PUBLICO"
                         });
                 });
 
@@ -89,6 +96,9 @@ namespace NNAContext.Migrations
                     b.Property<Guid>("IdRol")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("IdUnidad")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
@@ -101,21 +111,12 @@ namespace NNAContext.Migrations
                         {
                             Id = new Guid("1e28ad5c-8897-4f35-846e-beaede16b3b0"),
                             Contraseña = "123qwe",
-                            Correo = "admin@fiscalia.puebla.gob.mx",
+                            Correo = "root@fiscalia.puebla.gob.mx",
                             Estatus = true,
                             IdFiscalia = new Guid("f54fd0d9-be76-4c38-b7ed-edeb6f4c9939"),
                             IdRol = new Guid("73e08b06-a8c8-4960-9708-d77d4f938f0c"),
+                            IdUnidad = new Guid("1d02eda0-a6b8-4c08-9888-e61db604ecf0"),
                             Nombre = "Administrador"
-                        },
-                        new
-                        {
-                            Id = new Guid("542ac5f1-da0f-4454-9700-defa2d131b9d"),
-                            Contraseña = "123qwe",
-                            Correo = "marco_antonio.cantero@fiscalia.puebla.gob.mx",
-                            Estatus = true,
-                            IdFiscalia = new Guid("f54fd0d9-be76-4c38-b7ed-edeb6f4c9939"),
-                            IdRol = new Guid("49ecfee1-61f3-4e38-a28a-fe74c1bcb02c"),
-                            Nombre = "Marco Antonio"
                         });
                 });
 
@@ -325,23 +326,30 @@ namespace NNAContext.Migrations
                     b.Property<string>("Acronimo")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("Estatus")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
                     b.HasKey("Id");
 
-                    b.ToTable("Fiscalias");
+                    b.ToTable("Fiscalias", "Catalogo");
 
                     b.HasData(
                         new
                         {
                             Id = new Guid("f54fd0d9-be76-4c38-b7ed-edeb6f4c9939"),
                             Acronimo = "NONE",
-                            Nombre = "NONE",
-                            Status = true
+                            Estatus = true,
+                            Nombre = " NONE"
+                        },
+                        new
+                        {
+                            Id = new Guid("30df8b24-2f67-49c1-922d-0b1fb219aef9"),
+                            Acronimo = "FEIDVGM",
+                            Estatus = true,
+                            Nombre = "Fiscalía Especializada en Investigación de Delitos de Violencia de Género Contra las Mujeres"
                         });
                 });
 
@@ -360,7 +368,10 @@ namespace NNAContext.Migrations
                     b.Property<string>("ApellidoPaterno")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("IdFiscalia")
+                    b.Property<bool>("Estatus")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("IdUnidad")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("IdUsuario")
@@ -372,6 +383,42 @@ namespace NNAContext.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("MP");
+                });
+
+            modelBuilder.Entity("Modelos.Unidades", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Estatus")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("IdFiscalia")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Unidades", "Catalogo");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("1d02eda0-a6b8-4c08-9888-e61db604ecf0"),
+                            Estatus = true,
+                            IdFiscalia = new Guid("f54fd0d9-be76-4c38-b7ed-edeb6f4c9939"),
+                            Nombre = " NONE"
+                        },
+                        new
+                        {
+                            Id = new Guid("e13f9fdb-f883-4a0f-b1d5-66ce02249944"),
+                            Estatus = true,
+                            IdFiscalia = new Guid("30df8b24-2f67-49c1-922d-0b1fb219aef9"),
+                            Nombre = "UNIDAD ESPECIALIZADA EN INVESTIGACION DE DELITOS SEXUALES Y CIBERACOSO"
+                        });
                 });
 #pragma warning restore 612, 618
         }

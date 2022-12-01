@@ -23,7 +23,7 @@ namespace NNA.Controllers
         public IActionResult Index()
         {
             if(User.IsInRole(("49ecfee1-61f3-4e38-a28a-fe74c1bcb02c").ToString().ToUpper())){
-                return RedirectToAction("Index", "Agente");
+                return RedirectToAction("Index", "Fiscalia");
             }
             if (User.IsInRole(("73e08b06-a8c8-4960-9708-d77d4f938f0c").ToString().ToUpper()))
             {

@@ -1,7 +1,9 @@
 ﻿@using Modelos;
-
+@using Modelos.Acceso;
+@using Modelos.Data;
 @{
     Denuncia denuncia = (Denuncia)ViewData["denuncia"];
+    List<DataMP> mp = (List<DataMP>)ViewData["mp"];
     string audio = ViewData["audio"].ToString();
     string tipo = "Niños y Niñas";
 
@@ -33,7 +35,31 @@
         DENUNCIA @denuncia.Folio.ToString("D8")
     </div>
 
+
     <div class=" bg-gray-200 mt-9 overflow-x-auto  shadow-md sm:rounded-lg">
+        <div class="">
+            <h1 class="text-center text-xl font-bold my-4 mx-4">Asignar Denuncia</h1>
+
+            <form action="javascript:prueba()" name="asignar" id="asignar">
+                <div class="grid grid-cols-12">
+                    <div class="col-span-10 px-4">
+                        <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Agente del Ministerio Publico</label>
+                        <select class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" asp-items="@(new SelectList(mp,nameof(DataMP.Id), nameof(DataMP.NombreCompleto)))" name="mp" id="mp" required>
+                            <option value=""></option>
+                        </select>
+                    </div>
+                    
+
+                    <div class="col-span-2 px-4">
+                        <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 text-gray-200"> h</label>
+                        <button  type="submit" class="focus:outline-none text-white bg-yellow-600 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900">Asignar</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+        <hr />
+
         <form class="mb-10">
 
             <h1 class="text-center text-2xl font-bold my-4">Información General</h1>
@@ -175,13 +201,47 @@
                 center: { lat: @denuncia.Latitud, lng: @denuncia.Longitud },
                 zoom: 10,
             });
+
+
+
             var marker = new google.maps.Marker({
                 position: { lat: @denuncia.Latitud, lng: @denuncia.Longitud },
                 map: map,
                 title: ''
             });
+
         }
 
+
+
+        @*function GetAddress() {
+            var latlng = new google.maps.LatLng(@denuncia.Latitud, @denuncia.Longitud);
+            var geocoder = geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    if (results[1]) {
+                        console.log(results[1]);
+                    }
+                }
+            });
+        }*@
+
+
+        function prueba() {
+            var IdDenuncia = "@denuncia.Id";
+            $.ajax({
+                type: 'POST',
+                url: '/Denuncia/Asignar',
+                data: { mp: $("#mp").val(), IdDenuncia: IdDenuncia},
+                success: function (data) {
+                    console.log(data);
+
+                    if (data == '1') {
+                        window.location.href = "/Fiscalia/Index";
+                    }
+                }
+            });
+        }
 
     </script>
 
