@@ -34,7 +34,7 @@ namespace NNA.Controllers
                 {
                     new Claim(ClaimTypes.Name,  x.First().Correo),
                     new Claim(ClaimTypes.Role,x.First().IdRol.ToString().ToUpper())
-                };
+            };
 
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));

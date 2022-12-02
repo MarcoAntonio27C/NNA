@@ -17,12 +17,13 @@ $(document).ready(function () {
             $.ajax({
                 type: 'POST',
                 
-                url: './Acceso/validar',
+                //url: '/DigitalWindow/Acceso/validar',
+                url: "/Acceso/Validar",
                 data: { correo: mail, password : pass },
                 success: function (response) {
                     if (response === 'true') {
                         //alert("Acceso Correcto");
-                        $(location).attr('href', './Home/Index')
+                        $(location).attr('href', '/DigitalWindow/Home/Index')
                     } else {
                         $("#alert-4").show();
                         $("#incorrectos").show();

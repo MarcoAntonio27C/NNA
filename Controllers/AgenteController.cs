@@ -1,87 +1,39 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using NNAContext;
 
 namespace NNA.Controllers
 {
+    [Authorize]
     public class AgenteController : Controller
     {
-        // GET: AgenteController
-        public ActionResult Index()
+        private readonly NNA_Context _Context;
+
+        public AgenteController(NNA_Context context)
+        {
+            _Context = context;
+        }
+
+        public IActionResult Index()
         {
             return View();
         }
-
-        // GET: AgenteController/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Denuncias()
         {
+            var user = await _Context.Usuario.Where(x => x.Correo.Equals(User.Identity.Name)).FirstAsync();
+            var mp = await _Context.MP.Where(x => x.IdUsuario.Equals(user.Id)).FirstAsync();
+            var denuncias = await _Context.Denuncia.Where(x => x.IdMp.Equals(mp.Id)).ToListAsync();
+            ViewData["denuncias"] = denuncias;
             return View();
         }
 
-        // GET: AgenteController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
 
-        // POST: AgenteController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: AgenteController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: AgenteController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: AgenteController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: AgenteController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

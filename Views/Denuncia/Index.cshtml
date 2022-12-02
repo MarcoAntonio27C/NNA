@@ -1,6 +1,7 @@
 ﻿@using Modelos;
 @using Modelos.Acceso;
 @using Modelos.Data;
+@using Microsoft.AspNetCore.Identity;
 @{
     Denuncia denuncia = (Denuncia)ViewData["denuncia"];
     List<DataMP> mp = (List<DataMP>)ViewData["mp"];
@@ -16,122 +17,280 @@
     string imgSrc = "";
     string audioSrc = "";
 
-
     fotografia = Convert.ToBase64String(denuncia.Photo);
     imgSrc = String.Format("data:image/png;base64,{0}", fotografia);
 
-
     if (!audio.Equals(""))
     {
-
         audioSrc = String.Format("data:audio/acc;base64,{0}", audio);
     }
 }
 
-
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div class="container overflow-y-auto  mx-auto ">
 
     <div class="rounded-lg mt-3 text-center text-2xl bg-yellow-600 text-white font-bold py-5">
-        DENUNCIA @denuncia.Folio.ToString("D8")
+        @*DENUNCIA @denuncia.Folio.ToString("D8")*@
+        @denuncia.Expediente
     </div>
 
 
     <div class=" bg-gray-200 mt-9 overflow-x-auto  shadow-md sm:rounded-lg">
-        <div class="">
-            <h1 class="text-center text-xl font-bold my-4 mx-4">Asignar Denuncia</h1>
 
-            <form action="javascript:prueba()" name="asignar" id="asignar">
-                <div class="grid grid-cols-12">
-                    <div class="col-span-10 px-4">
-                        <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Agente del Ministerio Publico</label>
-                        <select class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" asp-items="@(new SelectList(mp,nameof(DataMP.Id), nameof(DataMP.NombreCompleto)))" name="mp" id="mp" required>
-                            <option value=""></option>
-                        </select>
+        @if (User.IsInRole(("49ecfee1-61f3-4e38-a28a-fe74c1bcb02c").ToString().ToUpper()))  // Admin Fiscalia Especializada
+        {
+            <div class="">
+                <h1 class="text-center text-xl font-bold my-4 mx-4">Asignar Denuncia</h1>
+
+                <form action="javascript:prueba()" name="asignar" id="asignar">
+                    <div class="grid grid-cols-12">
+                        <div class="col-span-10 px-4">
+                            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Agente del Ministerio Publico</label>
+                            <select class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" asp-items="@(new SelectList(mp,nameof(DataMP.Id), nameof(DataMP.NombreCompleto)))" name="mp" id="mp" required>
+                                <option value=""></option>
+                            </select>
+                        </div>
+
+
+                        <div class="col-span-2 px-4">
+                            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 text-gray-200"> h</label>
+                            <button type="submit" class="focus:outline-none text-white bg-yellow-600 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900">Asignar</button>
+                        </div>
                     </div>
-                    
-
-                    <div class="col-span-2 px-4">
-                        <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 text-gray-200"> h</label>
-                        <button  type="submit" class="focus:outline-none text-white bg-yellow-600 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900">Asignar</button>
-                    </div>
-                </div>
-            </form>
-
-        </div>
-        <hr />
+                </form>
+            </div>
+        }
 
         <form class="mb-10">
 
             <h1 class="text-center text-2xl font-bold my-4">Información General</h1>
 
-            <div class="flex">
 
-                <div class="w-3/4 px-4">
+            @if (denuncia.IdCaso.Equals(1)) // Niños y Niñas
+            {
+                <div class="flex">
 
-                    <div class="grid grid-cols-12">
-                        <div class="col-span-3">
-                            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Folio</label>
-                            <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" value="@denuncia.Folio.ToString("D8")" required>
+                    <div class="w-3/4 px-4">
+
+                        <div class="grid grid-cols-12">
+                            <div class="col-span-3">
+                                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo de Denuncia</label>
+                                <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" value="Niñas y Niños" required>
+                            </div>
+                            <div class="col-span-5 px-4">
+                                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-800 ">Fecha de Denuncia</label>
+                                <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5 " value="@denuncia.Fecha.ToString("f")">
+                            </div>
+                            <div class="col-span-4">
+                                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Municipio</label>
+                                <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" value="@denuncia.Municipio" required>
+                            </div>
                         </div>
-                        <div class="col-span-3 px-4">
-                            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo de Denuncia</label>
-                            <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" value="@tipo" required>
+
+                        <div class="grid grid-cols-12 my-4">
+                            <div class="col-span-5">
+                                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
+                                <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" value="@denuncia.Nombre" required>
+                            </div>
+
+                            <div class="col-span-2 mx-4 ">
+                                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-200 dark:text-white">Audio</label>
+                                <audio class="audio-nombre">
+                                    <source src="@audioSrc" type="audio/ogg; codecs=vorbis" />
+                                    Your browser does not support the audio element.
+                                </audio>
+                                <button type="button" onclick="play('audio-nombre');" class="focus:outline-none text-white bg-yellow-600 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 rounded-lg text-sm px-4 dark:focus:ring-yellow-900">
+                                    <span style="font-size:25px" class="py-1 text-white material-icons">
+                                        play_circle_outline
+                                    </span>
+                                </button>
+
+                                <a   
+                                   asp-controller="Denuncia" 
+                                   asp-action="Download" 
+                                   asp-route-IdDenuncia="@denuncia.Id" 
+                                   asp-route-audio="1"
+                                   class="focus:outline-none text-white bg-yellow-600 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 rounded-lg text-sm px-4 ">
+                                    <span style="font-size:25px" class="text-white material-icons">
+                                        file_download
+                                    </span>
+                                </a>
+                            </div>
+
+                            <div class="col-span-2 ">
+                                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-800 ">Edad</label>
+                                <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5 " value="@denuncia.Edad">
+                            </div>
+
+                            <div class="col-span-2 mx-4">
+                                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-200 dark:text-white">Audio</label>
+                                <audio class="audio-edad">
+                                    <source src="@audioSrc" type="audio/ogg; codecs=vorbis" />
+                                    Your browser does not support the audio element.
+                                </audio>
+                                <button type="button" onclick="play('audio-edad');" class="focus:outline-none text-white bg-yellow-600 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 rounded-lg text-sm px-4 dark:focus:ring-yellow-900">
+                                    <span style="font-size:25px" class="py-1 text-white material-icons">
+                                        play_circle_outline
+                                    </span>
+                                </button>
+
+                                <a 
+                                   asp-controller="Denuncia" 
+                                   asp-action="Download" 
+                                   asp-route-IdDenuncia="@denuncia.Id" 
+                                   asp-route-audio="2"
+                                   class="focus:outline-none text-white bg-yellow-600 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 rounded-lg text-sm px-4 dark:focus:ring-yellow-900">
+                                    <span style="font-size:25px" class="py-1 text-white material-icons">
+                                        file_download
+                                    </span>
+                                </a>
+                            </div>
                         </div>
-                        <div class="col-span-3">
-                            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-800 ">Fecha de Denuncia</label>
-                            <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5 " value="@denuncia.Fecha.ToString("D")">
+
+                        <div class="grid grid-cols-12 mt-4">
+                            <div class="col-span-4">
+                                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre de sus Papás o algún Familiar</label>
+                                <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" value="@denuncia.ParentsName" required>
+                            </div>
+
+                            <div class="col-span-2 mx-4">
+                                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-200 dark:text-white">Audio</label>
+                                <audio class="audio-nombre-familiar">
+                                    <source src="@audioSrc" type="audio/ogg; codecs=vorbis" />
+                                    Your browser does not support the audio element.
+                                </audio>
+                                <button type="button" onclick="play('audio-nombre-familiar');" class="focus:outline-none text-white bg-yellow-600 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 rounded-lg text-sm px-4 dark:focus:ring-yellow-900">
+                                    <span style="font-size:25px" class="py-1 text-white material-icons">
+                                        play_circle_outline
+                                    </span>
+                                </button>
+
+                                <a 
+                                   asp-controller="Denuncia" 
+                                   asp-action="Download" 
+                                   asp-route-IdDenuncia="@denuncia.Id" 
+                                   asp-route-audio="3"
+                                   class="focus:outline-none text-white bg-yellow-600 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 rounded-lg text-sm px-4 dark:focus:ring-yellow-900">
+                                    <span style="font-size:25px" class="py-1 text-white material-icons">
+                                        file_download
+                                    </span>
+                                </a>
+                            </div>
+
+                            <div class="col-span-4">
+                                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre de su Escuela o Número de Contacto</label>
+                                <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" value="@denuncia.Casa" required>
+                            </div>
+
+                            <div class="col-span-2 mx-4">
+                                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-200 dark:text-white">Audio</label>
+                                <audio class="audio-contacto">
+                                    <source src="@audioSrc" type="audio/ogg; codecs=vorbis" />
+                                    Your browser does not support the audio element.
+                                </audio>
+                                <button type="button" onclick="play('audio-contacto');" class="focus:outline-none text-white bg-yellow-600 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 rounded-lg text-sm px-4 dark:focus:ring-yellow-900">
+                                    <span style="font-size:25px" class="py-1 text-white material-icons">
+                                        play_circle_outline
+                                    </span>
+                                </button>
+
+                                <a 
+                                   asp-controller="Denuncia" 
+                                   asp-action="Download" 
+                                   asp-route-IdDenuncia="@denuncia.Id" 
+                                   asp-route-audio="4"
+                                   class="focus:outline-none text-white bg-yellow-600 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 rounded-lg text-sm px-4 dark:focus:ring-yellow-900">
+                                    <span style="font-size:25px" class="py-1 text-white material-icons">
+                                        file_download
+                                    </span>
+                                </a>
+                            </div>
                         </div>
-                        <div class="col-span-3 px-4">
-                            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Municipio</label>
-                            <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" value="@denuncia.Municipio" required>
-                        </div>
+
+
                     </div>
+                    <div class="w-1/4">
+                        <div>
+                            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-800 ">Fotografia</label>
+                            @if (!Convert.ToBase64String(denuncia.Photo).Equals(""))
+                            {
+                                <img class="w-3/5 border border-yellow-600 rounded-lg" src="@imgSrc" alt="" />
+                            }
+                            else
+                            {
+                                <img class="w-3/5 border border-yellow-600 rounded-lg" src="~/img/sin_foto.jpg" alt="" />
+                            }
 
-                    <div class="grid grid-cols-12 my-4">
-                        <div class="col-span-7">
-                            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre Completo</label>
-                            <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" value="@denuncia.Nombre" required>
-                        </div>
-                        <div class="col-span-2 px-2">
-                            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-800 ">Edad</label>
-                            <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5 " value="@denuncia.Edad">
-                        </div>
-                        <div class="col-span-3 px-4">
-                            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-800 ">Telefono</label>
-                            <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5 " value="@denuncia.Telefono">
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-12 mt-4">
-                        <div class="col-span-4">
-                            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Persona de Confianza</label>
-                            <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" value="@denuncia.ParentsName" required>
-                        </div>
-                        <div class="col-span-4 px-4">
-                            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Escuela</label>
-                            <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" value="@denuncia.Escuela" required>
-                        </div>
-                        <div class="col-span-4 px-4">
-                            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-800 ">Casa</label>
-                            <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5 " value="@denuncia.Casa">
                         </div>
                     </div>
                 </div>
-                <div class="w-1/4">
-                    <div>
-                        <label for="first_name" class="block mb-2 text-sm font-medium text-gray-800 ">Fotografia</label>
-                        @if (!Convert.ToBase64String(denuncia.Photo).Equals(""))
-                        {
-                            <img class="w-3/5 border border-yellow-600 rounded-lg" src="@imgSrc" alt="" />
-                        }
-                        else
-                        {
-                            <img class="w-3/5 border border-yellow-600 rounded-lg" src="~/img/sin_foto.jpg" alt="" />
-                        }
+            }
+            else // Adolescentes
+            {
+                <div class="flex">
+                    <div class="w-3/4 px-4">
 
+                        <div class="grid grid-cols-12">
+                            <div class="col-span-3">
+                                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo de Denuncia</label>
+                                <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" value="Adolescentes" required>
+                            </div>
+                            <div class="col-span-5 px-4">
+                                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-800 ">Fecha de Denuncia</label>
+                                <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5 " value="@denuncia.Fecha.ToString("f")">
+                            </div>
+                            <div class="col-span-4">
+                                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Municipio</label>
+                                <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" value="@denuncia.Municipio" required>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-12 my-4">
+                            <div class="col-span-4">
+                                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre Completo</label>
+                                <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" value="@denuncia.Nombre" required>
+                            </div>
+                            <div class="col-span-2 px-4">
+                                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-800 ">Edad</label>
+                                <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5 " value="@denuncia.Edad">
+                            </div>
+                            <div class="col-span-6">
+                                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Casa</label>
+                                <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" value="@denuncia.Casa" required>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-12 mt-4">
+                            <div class="col-span-6">
+                                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Escuela</label>
+                                <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" value="@denuncia.Escuela" required>
+                            </div>
+                            <div class="col-span-6 pl-4">
+                                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telefono</label>
+                                <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" value="@denuncia.Telefono" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-1/4">
+                        <div>
+                            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-800 ">Fotografia</label>
+                            @if (!Convert.ToBase64String(denuncia.Photo).Equals(""))
+                            {
+                                <img class="w-3/5 border border-yellow-600 rounded-lg" src="@imgSrc" alt="" />
+                            }
+                            else
+                            {
+                                <img class="w-3/5 border border-yellow-600 rounded-lg" src="~/img/sin_foto.jpg" alt="" />
+                            }
+
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
+
+
+            @*-----------------------------------------------------------------------------------------*@
+
 
 
 
@@ -176,11 +335,7 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-
-
-
             @*<button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>*@
         </form>
     </div>
@@ -231,16 +386,22 @@
             var IdDenuncia = "@denuncia.Id";
             $.ajax({
                 type: 'POST',
-                url: '/Denuncia/Asignar',
+                //url: '/DigitalWindow/Denuncia/Asignar',
+                url: "@Url.Action("Asignar", "Denuncia")",
                 data: { mp: $("#mp").val(), IdDenuncia: IdDenuncia},
                 success: function (data) {
                     console.log(data);
 
                     if (data == '1') {
-                        window.location.href = "/Fiscalia/Index";
+                        //_window.location.href = "/DigitalWindow/Fiscalia/Index";
+                         $(location).attr('href', "@Url.Action("Index", "Fiscalia")")
                     }
                 }
             });
+        }
+
+        function play(audio) {
+           document.getElementsByClassName(audio)[0].play();
         }
 
     </script>

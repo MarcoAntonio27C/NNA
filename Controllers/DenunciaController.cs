@@ -42,7 +42,8 @@ namespace NNA.Controllers
             }
            
 
-            var audio = GetAudio(denuncia);
+            var audio = GetAudio(denuncia.EventoRecord);
+
             ViewData["denuncia"] = denuncia;
             ViewData["emocion"] = emocion;
             ViewData["action"] = action;
@@ -67,14 +68,45 @@ namespace NNA.Controllers
 
             return agentes;
         }
-        public string GetAudio(Denuncia denuncia)
+
+        public async Task<FileResult> Download(string IdDenuncia, string audio )
+        {
+            var denuncia = await _Context.Denuncia.FindAsync(Guid.Parse(IdDenuncia));
+
+            if (audio.Equals("1")) { // Descargar Audio de Nombre
+               
+                byte[] bytes = Convert.FromBase64String(GetAudio(denuncia.NombreRecord));
+                Stream stream = new MemoryStream(bytes);
+                return File(bytes, System.Net.Mime.MediaTypeNames.Application.Octet, denuncia.Expediente + "-Nombre.acc");
+
+
+            }else if (audio.Equals("2")) // Audio Edad
+            {
+                byte[] bytes = Convert.FromBase64String(GetAudio(denuncia.EdadRecord));
+                Stream stream = new MemoryStream(bytes);
+                return File(bytes, System.Net.Mime.MediaTypeNames.Application.Octet,denuncia.Expediente+"-Edad.acc");
+            }
+            else if (audio.Equals("3")) // Audio Nombre Familiares
+            {
+                byte[] bytes = Convert.FromBase64String(GetAudio(denuncia.ParentsRecord)); // Nombre de sus Papas
+                Stream stream = new MemoryStream(bytes);
+                return File(bytes, System.Net.Mime.MediaTypeNames.Application.Octet, denuncia.Expediente + "-NombresFamiliares.acc");
+            }
+            else  // Audio Medio de Contacto
+            {
+                byte[] bytes = Convert.FromBase64String(GetAudio(denuncia.SomeDataRecord)); // Nombre de sus Papas
+                Stream stream = new MemoryStream(bytes);
+                return File(bytes, System.Net.Mime.MediaTypeNames.Application.Octet, denuncia.Expediente + "-MedioDeContacto.acc");
+            }
+
+        }
+        public string GetAudio(string path)
         {
 
-            if(denuncia.EventoRecord != null)
+            if(path != null)
             {
-                //var routeFTP = "ftp://10.24.1.13/2022/2/4/fe27d57e-bf9d-49e4-8928-d3f8ed58fb24/video.txt";
-                //var routeFTP = "ftp://10.24.1.29/audio.txt";
-                var routeFTP = denuncia.EventoRecord;
+
+                var routeFTP = path;
                 var response = "";
 
                 WebClient request = new();
@@ -112,6 +144,32 @@ namespace NNA.Controllers
 
         }
 
+
+        public async Task<IActionResult> DenunciasMP(string id)
+        {
+            var denuncia = await _Context.Denuncia.FindAsync(Guid.Parse(id));
+            var mp = await GetAgentesAsync();
+            string emocion = "";
+            string action = "";
+
+            if (denuncia.IdCaso.Equals(1))
+            {
+                var x = await _Context.Emotion.FindAsync(denuncia.IdEmotion);
+                emocion = x.Nombre;
+                var y = await _Context.Action.FindAsync(denuncia.IdAction);
+                action = y.Descripcion;
+            }
+
+
+            var audio = GetAudio(denuncia.EventoRecord);
+            ViewData["denuncia"] = denuncia;
+            ViewData["emocion"] = emocion;
+            ViewData["action"] = action;
+            ViewData["audio"] = audio;
+            ViewData["mp"] = mp;
+
+            return View();
+        }
 
     }
 }

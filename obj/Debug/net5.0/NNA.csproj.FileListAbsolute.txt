@@ -270,3 +270,5 @@ C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\ref\NNA.dll
 C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\NNA.pdb
 C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\NNA.genruntimeconfig.cache
 C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\Razor\Views\Fiscalia\Index.cshtml.g.cs
+C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\Razor\Views\Agente\Index.cshtml.g.cs
+C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\Razor\Views\Agente\Denuncias.cshtml.g.cs

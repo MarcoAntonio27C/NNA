@@ -29,6 +29,10 @@ namespace NNA.Controllers
             {
                 return RedirectToAction("Index", "Administrador");
             }
+            if (User.IsInRole(("6F1BE536-C224-4F31-914E-C9D00CCE1EB9").ToString().ToUpper()))
+            {
+                return RedirectToAction("Index", "Agente");
+            }
             return View();
         }
 
