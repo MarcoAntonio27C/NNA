@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NNAContext;
 
 namespace NNAContext.Migrations
 {
     [DbContext(typeof(NNA_Context))]
-    partial class NNA_ContextModelSnapshot : ModelSnapshot
+    [Migration("20221205221706_add-Estatus")]
+    partial class addEstatus
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -333,6 +335,26 @@ namespace NNAContext.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Estatus");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Nombre = "ARCHIVO",
+                            Status = true
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Nombre = "EAT",
+                            Status = true
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Nombre = "CDI",
+                            Status = true
+                        });
                 });
 
             modelBuilder.Entity("Modelos.Fiscalias", b =>

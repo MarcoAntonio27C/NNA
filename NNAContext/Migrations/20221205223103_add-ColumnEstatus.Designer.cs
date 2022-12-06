@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NNAContext;
 
 namespace NNAContext.Migrations
 {
     [DbContext(typeof(NNA_Context))]
-    partial class NNA_ContextModelSnapshot : ModelSnapshot
+    [Migration("20221205223103_add-ColumnEstatus")]
+    partial class addColumnEstatus
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -205,6 +207,9 @@ namespace NNAContext.Migrations
                     b.Property<string>("Escuela")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Estatus")
+                        .HasColumnType("int");
+
                     b.Property<string>("Evento")
                         .HasColumnType("nvarchar(max)");
 
@@ -230,9 +235,6 @@ namespace NNAContext.Migrations
 
                     b.Property<int>("IdEmotion")
                         .HasColumnType("int");
-
-                    b.Property<Guid>("IdFiscalia")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("IdMp")
                         .HasColumnType("uniqueidentifier");
@@ -333,6 +335,26 @@ namespace NNAContext.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Estatus");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Nombre = "ARCHIVO",
+                            Status = true
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Nombre = "EAT",
+                            Status = true
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Nombre = "CDI",
+                            Status = true
+                        });
                 });
 
             modelBuilder.Entity("Modelos.Fiscalias", b =>

@@ -29,8 +29,10 @@ namespace NNA.Controllers
         {
             var user = await _Context.Usuario.Where(x => x.Correo.Equals(User.Identity.Name)).FirstAsync();
             var mp = await _Context.MP.Where(x => x.IdUsuario.Equals(user.Id)).FirstAsync();
+            var estatus = await _Context.Estatus.ToListAsync();
             var denuncias = await _Context.Denuncia.Where(x => x.IdMp.Equals(mp.Id)).ToListAsync();
             ViewData["denuncias"] = denuncias;
+            ViewData["estatus"] = estatus;
             return View();
         }
 

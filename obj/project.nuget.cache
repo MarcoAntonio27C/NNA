@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ngfxRTu6HxCqBKnqe1nr66EYrK14oWuZ7m5DieQ8SFqu2G1u7PYVJr6PV3+leEKzX3Doeeb7/Muos+KKKbnrEg==",
+  "dgSpecHash": "QrapPAqZ5+2DnUsaSU3i1SsUiYBZrV1HQZqnYFt+WgO0VhhkL1uTrZyyU0OtyefNjj411gx7eu+e4A0KAeJzqg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Ast\\Source\\Repos\\MarcoAntonio27C\\NNA\\NNA.csproj",
+  "projectFilePath": "C:\\Users\\Ast\\source\\repos\\MarcoAntonio27C\\NNA\\NNA.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Ast\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Ast\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",

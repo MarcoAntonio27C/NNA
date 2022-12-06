@@ -114,6 +114,14 @@ C:\Users\marco\source\repos\NNA\obj\Debug\net5.0\NNA.pdb
 C:\Users\marco\source\repos\NNA\obj\Debug\net5.0\NNA.genruntimeconfig.cache
 C:\Users\marco\source\repos\NNA\obj\Debug\net5.0\ref\NNA.dll
 C:\Users\marco\source\repos\NNA\obj\Debug\net5.0\Razor\Views\Acesso\Index.cshtml.g.cs
+C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\NNA.csproj.AssemblyReference.cache
+C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\NNA.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\NNA.AssemblyInfoInputs.cache
+C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\NNA.AssemblyInfo.cs
+C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\NNA.csproj.CoreCompileInputs.cache
+C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\NNA.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\NNA.RazorAssemblyInfo.cache
+C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\NNA.RazorAssemblyInfo.cs
 C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\bin\Debug\net5.0\appsettings.Development.json
 C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\bin\Debug\net5.0\appsettings.json
 C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\bin\Debug\net5.0\NNA.exe
@@ -235,14 +243,6 @@ C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\bin\Debug\net5.0\Modelos.dll
 C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\bin\Debug\net5.0\NNAContext.dll
 C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\bin\Debug\net5.0\NNAContext.pdb
 C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\bin\Debug\net5.0\Modelos.pdb
-C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\NNA.csproj.AssemblyReference.cache
-C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\NNA.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\NNA.AssemblyInfoInputs.cache
-C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\NNA.AssemblyInfo.cs
-C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\NNA.csproj.CoreCompileInputs.cache
-C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\NNA.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\NNA.RazorAssemblyInfo.cache
-C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\NNA.RazorAssemblyInfo.cs
 C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\staticwebassets\NNA.StaticWebAssets.Manifest.cache
 C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\staticwebassets\NNA.StaticWebAssets.xml
 C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\scopedcss\bundle\NNA.styles.css
@@ -251,7 +251,10 @@ C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\NNA.TagHelpers.ou
 C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\NNA.RazorCoreGenerate.cache
 C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\Razor\Views\Acceso\Index.cshtml.g.cs
 C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\Razor\Views\Administrador\Index.cshtml.g.cs
+C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\Razor\Views\Agente\Denuncias.cshtml.g.cs
+C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\Razor\Views\Agente\Index.cshtml.g.cs
 C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\Razor\Views\Denuncia\Index.cshtml.g.cs
+C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\Razor\Views\Fiscalia\Index.cshtml.g.cs
 C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\Razor\Views\Home\Privacy.cshtml.g.cs
 C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
@@ -269,6 +272,3 @@ C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\NNA.dll
 C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\ref\NNA.dll
 C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\NNA.pdb
 C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\NNA.genruntimeconfig.cache
-C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\Razor\Views\Fiscalia\Index.cshtml.g.cs
-C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\Razor\Views\Agente\Index.cshtml.g.cs
-C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Debug\net5.0\Razor\Views\Agente\Denuncias.cshtml.g.cs

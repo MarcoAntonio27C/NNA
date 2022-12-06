@@ -18,6 +18,7 @@ namespace NNAContext
         public DbSet<Caso> Caso { get; set; }
         public DbSet<Denuncia> Denuncia { get; set; }
         public DbSet<Emotion> Emotion { get; set; }
+        public DbSet<Estatus> Estatus { get; set; }
         public DbSet<Fiscalias> Fiscalias { get; set; }
         public DbSet<MP> MP { get; set; }
         public DbSet<Unidades> Unidades { get; set; }
@@ -54,6 +55,11 @@ namespace NNAContext
             {
                 entity.HasKey(e => e.Id);
             });
+
+            //modelBuilder.Entity<Estatus>(entity =>
+            //{
+            //    entity.HasKey(e => e.Id);
+            //});
 
             modelBuilder.Entity<Fiscalias>(entity =>
             {
@@ -103,6 +109,11 @@ namespace NNAContext
             modelBuilder.Entity<Actions>().HasData(new Actions { Id = 2, Descripcion = "Alguien me tocó o me hizo tocar su cuerpo" });
             modelBuilder.Entity<Actions>().HasData(new Actions { Id = 3, Descripcion = "Alguien me grita o me dice cosas malas" });
             modelBuilder.Entity<Actions>().HasData(new Actions { Id = 4, Descripcion = "Alguien me manda a trabajar" });
+
+            //ESTATUS 
+            //modelBuilder.Entity<Estatus>().HasData(new Estatus { Id = 1, Nombre = "ARCHIVO", Status=  true });
+            //modelBuilder.Entity<Estatus>().HasData(new Estatus { Id = 2, Nombre = "EAT", Status = true });
+            //modelBuilder.Entity<Estatus>().HasData(new Estatus { Id = 3, Nombre = "CDI", Status = true });
         }
     }
 }
