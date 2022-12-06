@@ -10,8 +10,8 @@ using NNAContext;
 namespace NNAContext.Migrations
 {
     [DbContext(typeof(NNA_Context))]
-    [Migration("20221128233334_Initial")]
-    partial class Initial
+    [Migration("20221206161202_updateDenuncia")]
+    partial class updateDenuncia
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -206,6 +206,9 @@ namespace NNAContext.Migrations
 
                     b.Property<string>("Escuela")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Estatus")
+                        .HasColumnType("int");
 
                     b.Property<string>("Evento")
                         .HasColumnType("nvarchar(max)");

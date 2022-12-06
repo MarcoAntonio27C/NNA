@@ -36,7 +36,7 @@ namespace Modelos
         public int IdAction { get; set; }
         public int IdCaso { get; set; }
         public Guid IdMp { get; set; }
-        //public int Estatus { get; set; }
+        public int Estatus { get; set; }
         public Guid IdFiscalia { get; set; }
     }
 }

@@ -59,7 +59,6 @@ namespace NNA.Controllers
             ViewData["audioSomeData"] = audioSomeData;
             ViewData["audioRelato"] = audioRelato;
             ViewData["mp"] = mp;
-
             return View();
         }
 
@@ -98,19 +97,19 @@ namespace NNA.Controllers
             }
             else if (audio.Equals("3")) // Audio Nombre Familiares
             {
-                byte[] bytes = Convert.FromBase64String(GetAudio(denuncia.ParentsRecord)); // Nombre de sus Papas
+                byte[] bytes = Convert.FromBase64String(GetAudio(denuncia.ParentsRecord));
                 Stream stream = new MemoryStream(bytes);
                 return File(bytes, System.Net.Mime.MediaTypeNames.Application.Octet, denuncia.Expediente + "-NombresFamiliares.acc");
             }
             else if (audio.Equals("4")) // Audio Medio de Contacto
             {
-                byte[] bytes = Convert.FromBase64String(GetAudio(denuncia.SomeDataRecord)); // Nombre de sus Papas
+                byte[] bytes = Convert.FromBase64String(GetAudio(denuncia.SomeDataRecord)); 
                 Stream stream = new MemoryStream(bytes);
                 return File(bytes, System.Net.Mime.MediaTypeNames.Application.Octet, denuncia.Expediente + "-MedioDeContacto.acc");
             }
-            else // Audio Medio de Contacto
+            else // Relato
             {
-                byte[] bytes = Convert.FromBase64String(GetAudio(denuncia.EventoRecord)); // Nombre de sus Papas
+                byte[] bytes = Convert.FromBase64String(GetAudio(denuncia.EventoRecord)); 
                 Stream stream = new MemoryStream(bytes);
                 return File(bytes, System.Net.Mime.MediaTypeNames.Application.Octet, denuncia.Expediente + "-Relato.acc");
             }
@@ -150,19 +149,20 @@ namespace NNA.Controllers
         {
             var denuncia = await _Context.Denuncia.FindAsync(Guid.Parse(IdDenuncia));
             denuncia.Asignada = true;
+            denuncia.Estatus = 1;
             denuncia.IdMp = Guid.Parse(mp);
             _Context.Entry(denuncia).State = EntityState.Modified;
             var x = await _Context.SaveChangesAsync();
             return x.ToString();
         }
-        //public async Task<string> Estatus(int estatus, string IdDenuncia)
-        //{
-        //    var denuncia = await _Context.Denuncia.FindAsync(Guid.Parse(IdDenuncia));
-        //    denuncia.Estatus = estatus;
-        //    _Context.Entry(denuncia).State = EntityState.Modified;
-        //    var x = await _Context.SaveChangesAsync();
-        //    return x.ToString();
-        //}
+        public async Task<string> Estatus(int estatus, string IdDenuncia)
+        {
+            var denuncia = await _Context.Denuncia.FindAsync(Guid.Parse(IdDenuncia));
+            denuncia.Estatus = estatus;
+            _Context.Entry(denuncia).State = EntityState.Modified;
+            var x = await _Context.SaveChangesAsync();
+            return x.ToString();
+        }
 
 
         public async Task<IActionResult> DenunciasMP(string id)
@@ -187,7 +187,6 @@ namespace NNA.Controllers
             ViewData["action"] = action;
             ViewData["audio"] = audio;
             ViewData["mp"] = mp;
-
             return View();
         }
 

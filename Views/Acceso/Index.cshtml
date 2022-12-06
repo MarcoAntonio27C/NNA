@@ -67,7 +67,6 @@
     </div>
 </body>
 </html>
-@*<script src="~/js/Acceso.js"></script>*@
 
 <script>
     $(document).ready(function () {
@@ -87,14 +86,10 @@
 
                 $.ajax({
                     type: 'POST',
-
-                    //url: '/DigitalWindow/Acceso/validar',
                     url: "@Url.Action("validar", "Acceso")",
                     data: { correo: mail, password: pass },
                     success: function (response) {
                         if (response === 'true') {
-                            //alert("Acceso Correcto");
-                            //$(location).attr('href', '/DigitalWindow/Home/Index')
                             $(location).attr('href', "@Url.Action("Index", "Home")")
                         } else {
                             $("#alert-4").show();

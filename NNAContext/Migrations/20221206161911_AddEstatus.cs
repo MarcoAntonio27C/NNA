@@ -2,7 +2,7 @@
 
 namespace NNAContext.Migrations
 {
-    public partial class addEstatus : Migration
+    public partial class AddEstatus : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -1,16 +1,11 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NNAContext.Migrations
 {
-    public partial class addColumnEstatus : Migration
+    public partial class updateDenuncia : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "IdFiscalia",
-                table: "Denuncia");
-
             migrationBuilder.AddColumn<int>(
                 name: "Estatus",
                 table: "Denuncia",
@@ -24,13 +19,6 @@ namespace NNAContext.Migrations
             migrationBuilder.DropColumn(
                 name: "Estatus",
                 table: "Denuncia");
-
-            migrationBuilder.AddColumn<Guid>(
-                name: "IdFiscalia",
-                table: "Denuncia",
-                type: "uniqueidentifier",
-                nullable: false,
-                defaultValue: new Guid("00000000-0000-0000-0000-000000000000"));
         }
     }
 }

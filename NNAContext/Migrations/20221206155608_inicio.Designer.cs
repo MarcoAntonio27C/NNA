@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NNAContext;
 
 namespace NNAContext.Migrations
 {
     [DbContext(typeof(NNA_Context))]
-    partial class NNA_ContextModelSnapshot : ModelSnapshot
+    [Migration("20221206155608_inicio")]
+    partial class inicio
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -234,9 +236,6 @@ namespace NNAContext.Migrations
                     b.Property<int>("IdEmotion")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("IdFiscalia")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("IdMp")
                         .HasColumnType("uniqueidentifier");
 
@@ -341,24 +340,18 @@ namespace NNAContext.Migrations
                         new
                         {
                             Id = 1,
-                            Nombre = "SIN ATENDER",
-                            Status = true
-                        },
-                        new
-                        {
-                            Id = 2,
                             Nombre = "ARCHIVO",
                             Status = true
                         },
                         new
                         {
-                            Id = 3,
+                            Id = 2,
                             Nombre = "EAT",
                             Status = true
                         },
                         new
                         {
-                            Id = 4,
+                            Id = 3,
                             Nombre = "CDI",
                             Status = true
                         });

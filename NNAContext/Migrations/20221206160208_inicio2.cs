@@ -3,24 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NNAContext.Migrations
 {
-    public partial class bdNormal : Migration
+    public partial class inicio2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DeleteData(
-                table: "Estatus",
-                keyColumn: "Id",
-                keyValue: 1);
-
-            migrationBuilder.DeleteData(
-                table: "Estatus",
-                keyColumn: "Id",
-                keyValue: 2);
-
-            migrationBuilder.DeleteData(
-                table: "Estatus",
-                keyColumn: "Id",
-                keyValue: 3);
+            migrationBuilder.DropTable(
+                name: "Estatus");
 
             migrationBuilder.DropColumn(
                 name: "Estatus",
@@ -46,6 +34,20 @@ namespace NNAContext.Migrations
                 type: "int",
                 nullable: false,
                 defaultValue: 0);
+
+            migrationBuilder.CreateTable(
+                name: "Estatus",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Estatus", x => x.Id);
+                });
 
             migrationBuilder.InsertData(
                 table: "Estatus",

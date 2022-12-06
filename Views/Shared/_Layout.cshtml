@@ -85,18 +85,50 @@
                             </li>
                         }
 
+
+                        @if (User.IsInRole(("49ECFEE1-61F3-4E38-A28A-FE74C1BCB02C").ToString().ToUpper())) // Administrador de Fiscalia
+                        {
+                            <li>
+                                <a asp-controller="Fiscalia" asp-action="Denuncias" id="denuncias" data-dropdown-toggle="dropdownNavbar" class="flex relative items-center justify-between w-full py-2 pl-3 pr-4 font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto">Denuncias</a>
+                                <!-- Dropdown menu -->
+                                <div>
+                                    <div id="menu-denuncias" class="z-10 hidden absolute  font-normal bg-white divide-y divide-gray-100 rounded shadow w-44">
+                                        <ul class="py-1 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
+                                            <li>
+                                                <a asp-controller="Fiscalia" asp-action="Asignadas" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Asignadas</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <a asp-controller="Fiscalia" asp-action="MP" id="" data-dropdown-toggle="dropdownNavbar" class="flex relative items-center justify-between w-full py-2 pl-3 pr-4 font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto">MP</a>
+                                <!-- Dropdown menu -->
+                                @*<div>
+                                    <div id="menu-denuncias" class="z-10 hidden absolute  font-normal bg-white divide-y divide-gray-100 rounded shadow w-44">
+                                        <ul class="py-1 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
+                                            <li>
+                                                <a asp-controller="Fiscalia" asp-action="Asignadas" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Asignadas</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>*@
+                            </li>
+                        }
+
+
                         @if (User.IsInRole(("6F1BE536-C224-4F31-914E-C9D00CCE1EB9").ToString().ToUpper()))
                         {
                             <li>
                                 <a asp-controller="Agente" asp-action="Denuncias" id="denuncias" data-dropdown-toggle="dropdownNavbar" class="flex relative items-center justify-between w-full py-2 pl-3 pr-4 font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto">Denuncias</a>
                                 <!-- Dropdown menu -->
                                 @*<div id="menu-denuncias" class="z-10 hidden absolute  font-normal bg-white divide-y divide-gray-100 rounded shadow w-44">
-                                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
-                                        <li>
-                                            <a asp-controller="Usuarios" asp-action="create" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Agregar</a>
-                                        </li>
-                                    </ul>
-                                </div>*@
+                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
+                        <li>
+                            <a asp-controller="Usuarios" asp-action="create" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Agregar</a>
+                        </li>
+                    </ul>
+                </div>*@
                             </li>
                         }
 

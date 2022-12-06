@@ -1,0 +1,75 @@
+﻿
+@using Modelos;
+@{
+    ViewData["Title"] = "Administrador";
+    List<Denuncia> denuncias = (List<Denuncia>)ViewData["denuncias"];
+    string niños = "Niños y Niñas";
+    string adolescentes = "Adolescentes";
+}
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div class="container   mx-auto ">
+    <div class="rounded-lg mt-3 text-center text-2xl bg-yellow-600 text-white font-bold py-5">
+        NUEVAS DENUNCIAS
+    </div>
+    <div class=" mt-9 overflow-x-auto relative shadow-md sm:rounded-lg">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="py-3 px-6">
+                        Denuncia
+                    </th>
+                    <th scope="col" class="py-3 px-6">
+                        Denuncia Recibida
+                    </th>
+                    <th scope="col" class="py-3 px-6">
+                        Tipo Denuncia
+                    </th>
+                    <th scope="col" class="py-3 px-6">
+                        Nombre
+                    </th>
+                    <th scope="col" class="py-3 px-6">
+                        Edad
+                    </th>
+                    <th scope="col" class="py-3 px-6">
+                        Visualizar
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var denuncia in denuncias)
+                {
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            @*@denuncia.Folio.ToString("D6")*@
+                            @denuncia.Expediente
+                        </th>
+                        <td class="py-4 px-6">
+                            @denuncia.Fecha.ToString("D")
+                        </td>
+                        <td class="py-4 px-6">
+                            @if (denuncia.IdCaso.Equals(1))
+                            {
+                                @niños;
+                            }
+                            else
+                            {
+                                @adolescentes;
+                            }
+                        </td>
+                        <td class="py-4 px-6">
+                            @denuncia.Nombre
+                        </td>
+                        <td class="py-4 px-6">
+                            @denuncia.Edad
+                        </td>
+                        <td class="py-4 px-6">
+                            <a class="text-bold hover:text-yellow-600" asp-controller="Denuncia" asp-action="Index" asp-route-id="@denuncia.Id">Ver Denuncia</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

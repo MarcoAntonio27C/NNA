@@ -1,15 +1,16 @@
-﻿@using Modelos;
+﻿
+@using Modelos;
+@using Modelos.Data;
 @{
-    ViewData["Title"] = "Agente MP";
-    List<Denuncia> denuncias = (List<Denuncia>)ViewData["denuncias"];
-    List<Estatus> estatus = (List<Estatus>)ViewData["estatus"];
+    ViewData["Title"] = "Administrador";
+    List<DataAsignada> denuncias = (List<DataAsignada>)ViewData["denuncias"];
     string niños = "Niños y Niñas";
     string adolescentes = "Adolescentes";
 }
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div class="container   mx-auto ">
     <div class="rounded-lg mt-3 text-center text-2xl bg-yellow-600 text-white font-bold py-5">
-        DENUNCIAS
+        DENUNCIAS ASIGNADAS
     </div>
     <div class=" mt-9 overflow-x-auto relative shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -29,6 +30,9 @@
                     </th>
                     <th scope="col" class="py-3 px-6">
                         Edad
+                    </th>
+                    <th scope="col" class="py-3 px-6">
+                        Agente del Ministerio Publico
                     </th>
                     <th scope="col" class="py-3 px-6">
                         Estatus
@@ -67,21 +71,21 @@
                         @denuncia.Edad
                     </td>
                     <td class="py-4 px-6">
-                        @foreach (var x in estatus)
-                        {
-                            if (denuncia.Estatus.Equals(x.Id))
-                            {
-                                @x.Nombre;
-                            }
-                        }
-
-                        @if (denuncia.Estatus.Equals(0))
-                        {
-                        <p>Sin Estatus</p>
-                        }
+                        @denuncia.NombreMP
                     </td>
                     <td class="py-4 px-6">
-                        <a class="text-bold text-yellow-600 hover:text-yellow-700" asp-controller="Denuncia" asp-action="Index" asp-route-id="@denuncia.Id">Ver Denuncia</a>
+                        @if (denuncia.IdEstatus.Equals(1))
+                        {
+                            <span class="text-red-500">@denuncia.NombreEstatus</span>
+                        }
+                        else
+                        {
+                            @denuncia.NombreEstatus
+                        }
+
+                    </td>
+                    <td class="py-4 px-6">
+                        <a class="text-bold hover:text-yellow-600" asp-controller="Denuncia" asp-action="Index" asp-route-id="@denuncia.Id">Ver Denuncia</a>
                     </td>
                 </tr>
                 }

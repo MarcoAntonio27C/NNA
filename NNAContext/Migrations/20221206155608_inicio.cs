@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NNAContext.Migrations
 {
-    public partial class Initial : Migration
+    public partial class inicio : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -69,7 +69,7 @@ namespace NNAContext.Migrations
                     IdAction = table.Column<int>(type: "int", nullable: false),
                     IdCaso = table.Column<int>(type: "int", nullable: false),
                     IdMp = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdFiscalia = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    Estatus = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -88,6 +88,20 @@ namespace NNAContext.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Emotion", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Estatus",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Estatus", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -173,6 +187,16 @@ namespace NNAContext.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Estatus",
+                columns: new[] { "Id", "Nombre", "Status" },
+                values: new object[,]
+                {
+                    { 3, "CDI", true },
+                    { 2, "EAT", true },
+                    { 1, "ARCHIVO", true }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Roles",
                 columns: new[] { "Id", "Descripcion", "Estatus", "Nombre" },
                 values: new object[,]
@@ -206,8 +230,8 @@ namespace NNAContext.Migrations
                 columns: new[] { "Id", "Nombre" },
                 values: new object[,]
                 {
-                    { 2, "Adolescentes" },
-                    { 1, "Niños y Niñas" }
+                    { 1, "Niños y Niñas" },
+                    { 2, "Adolescentes" }
                 });
 
             migrationBuilder.InsertData(
@@ -216,11 +240,11 @@ namespace NNAContext.Migrations
                 columns: new[] { "Id", "Nombre" },
                 values: new object[,]
                 {
+                    { 5, "PREOCUPADO" },
                     { 1, "BIEN" },
-                    { 2, "MAL" },
                     { 3, "ENOJADO" },
-                    { 4, "TRISTE" },
-                    { 5, "PREOCUPADO" }
+                    { 2, "MAL" },
+                    { 4, "TRISTE" }
                 });
 
             migrationBuilder.InsertData(
@@ -260,6 +284,9 @@ namespace NNAContext.Migrations
             migrationBuilder.DropTable(
                 name: "Emotion",
                 schema: "Catalogo");
+
+            migrationBuilder.DropTable(
+                name: "Estatus");
 
             migrationBuilder.DropTable(
                 name: "Fiscalias",

@@ -10,8 +10,8 @@ using NNAContext;
 namespace NNAContext.Migrations
 {
     [DbContext(typeof(NNA_Context))]
-    [Migration("20221205223103_add-ColumnEstatus")]
-    partial class addColumnEstatus
+    [Migration("20221206160208_inicio2")]
+    partial class inicio2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -207,9 +207,6 @@ namespace NNAContext.Migrations
                     b.Property<string>("Escuela")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Estatus")
-                        .HasColumnType("int");
-
                     b.Property<string>("Evento")
                         .HasColumnType("nvarchar(max)");
 
@@ -235,6 +232,9 @@ namespace NNAContext.Migrations
 
                     b.Property<int>("IdEmotion")
                         .HasColumnType("int");
+
+                    b.Property<Guid>("IdFiscalia")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("IdMp")
                         .HasColumnType("uniqueidentifier");
@@ -316,44 +316,6 @@ namespace NNAContext.Migrations
                         {
                             Id = 5,
                             Nombre = "PREOCUPADO"
-                        });
-                });
-
-            modelBuilder.Entity("Modelos.Estatus", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Estatus");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Nombre = "ARCHIVO",
-                            Status = true
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Nombre = "EAT",
-                            Status = true
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Nombre = "CDI",
-                            Status = true
                         });
                 });
 

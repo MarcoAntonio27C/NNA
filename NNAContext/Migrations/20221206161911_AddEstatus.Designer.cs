@@ -10,8 +10,8 @@ using NNAContext;
 namespace NNAContext.Migrations
 {
     [DbContext(typeof(NNA_Context))]
-    [Migration("20221205234501_bdNormal")]
-    partial class bdNormal
+    [Migration("20221206161911_AddEstatus")]
+    partial class AddEstatus
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -207,6 +207,9 @@ namespace NNAContext.Migrations
                     b.Property<string>("Escuela")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Estatus")
+                        .HasColumnType("int");
+
                     b.Property<string>("Evento")
                         .HasColumnType("nvarchar(max)");
 
@@ -335,6 +338,26 @@ namespace NNAContext.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Estatus");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Nombre = "ARCHIVO",
+                            Status = true
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Nombre = "EAT",
+                            Status = true
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Nombre = "CDI",
+                            Status = true
+                        });
                 });
 
             modelBuilder.Entity("Modelos.Fiscalias", b =>

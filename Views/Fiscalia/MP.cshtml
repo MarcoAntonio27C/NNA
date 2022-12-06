@@ -1,0 +1,53 @@
+﻿@using Modelos.Data;
+@{
+    ViewData["Title"] = "Administrador";
+    List<DataMP> agentes = (List<DataMP>)ViewData["agentes"];
+
+}
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div class="container   mx-auto ">
+    <div class="rounded-lg mt-3 text-center text-2xl bg-yellow-600 text-white font-bold py-5">
+        Agentes del Ministerio Publico
+    </div>
+    <div class=" mt-9 overflow-x-auto relative shadow-md sm:rounded-lg">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="py-3 px-6">
+                        Nombre Completo
+                    </th>
+                    <th scope="col" class="py-3 px-6">
+                        Fiscalia
+                    </th>
+                    <th scope="col" class="py-3 px-6">
+                        Unidad
+                    </th>
+                    <th scope="col" class="py-3 px-6">
+                        Denuncias a cargo
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var mp in agentes)
+                {
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        @mp.NombreCompleto
+                    </th>
+                    <td class="py-4 px-6">
+                        @mp.Fiscalia
+                    </td>
+                    <td class="py-4 px-6">
+                        @mp.Unidad
+                    </td>
+                    <td class="py-4 px-6">
+                        <a class="text-bold hover:text-yellow-600" asp-controller="Fiscalia" asp-action="DenunciasMP" asp-route-IdMp="@mp.Id">Ver Denuncias</a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

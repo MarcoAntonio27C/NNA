@@ -331,11 +331,7 @@
                 </div>
             }
 
-
             @*-----------------------------------------------------------------------------------------*@
-
-
-
 
             <h1 class="text-center text-2xl font-bold my-4">Denuncia</h1>
 
@@ -468,6 +464,8 @@
 
         function asignar() {
             var IdDenuncia = "@denuncia.Id";
+            //console.log("Denuncia: "+IdDenuncia);
+            //console.log($("#mp").val());
             $.ajax({
                 type: 'POST',
                 url: "@Url.Action("Asignar", "Denuncia")",
@@ -476,7 +474,7 @@
                     console.log(data);
 
                     if (data == '1') {
-                         $(location).attr('href', "@Url.Action("Index", "Fiscalia")")
+                         $(location).attr('href', "@Url.Action("Denuncias", "Fiscalia")")
                     }
                 }
             });

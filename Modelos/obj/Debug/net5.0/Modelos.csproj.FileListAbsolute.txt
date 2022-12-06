@@ -9,4 +9,4 @@ C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\Modelos\obj\Debug\net5.0\Modelos.c
 C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\Modelos\obj\Debug\net5.0\Modelos.dll
 C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\Modelos\obj\Debug\net5.0\ref\Modelos.dll
 C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\Modelos\obj\Debug\net5.0\Modelos.pdb
-C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\Modelos\obj\Debug\net5.0\Modelos.csproj.AssemblyReference.cache
+C:\Users\Ast\source\repos\MarcoAntonio27C\NNA\Modelos\obj\Debug\net5.0\Modelos.csproj.AssemblyReference.cache
