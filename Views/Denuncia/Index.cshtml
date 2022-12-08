@@ -137,7 +137,7 @@
                             </div>
                             <div class="col-span-4">
                                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Municipio</label>
-                                <input type="text" readonly id="" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" value="@denuncia.Municipio" required>
+                                <input type="text" readonly id="municipio" class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" value="" required>
                             </div>
                         </div>
 
@@ -383,7 +383,6 @@
                         <label class="block mb-2 text-sm font-medium text-gray-800 ">Lugar de la Denuncia</label>
                         <label class="block mb-2 text-sm font-medium text-gray-800 ">@denuncia.PlaceName</label>
                         <div class="block w-full h-80" id="map">
-
                         </div>
                     </div>
                 </div>
@@ -392,6 +391,7 @@
         </form>
     </div>
 
+    <button onclick="GetAddress()" >Ver Direccion</button>
 </div>
 
 
@@ -401,6 +401,40 @@
 
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1Cq_73I51TlW3q_CqYZJz7dHcCY6B_kQ&libraries=visualization&callback=initMap" type="text/javascript"></script>
     <script>
+
+        var map;
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: @denuncia.Latitud, lng: @denuncia.Longitud },
+                zoom: 10,
+            });
+
+            var marker = new google.maps.Marker({
+                position: { lat: @denuncia.Latitud, lng: @denuncia.Longitud },
+                map: map,
+                title: ''
+            });
+        }
+
+            function GetAddress() {
+            var latlng = new google.maps.LatLng(@denuncia.Latitud, @denuncia.Longitud);
+            var geocoder = geocoder = new google.maps.Geocoder();
+                geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        let resultados = Object.values(results);
+                        if (results[1]) {
+                            console.log(resultados);
+                            for (const property in resultados) {
+                                if (resultados[property].types[0] == 'administrative_area_level_2') {
+                                    console.log(resultados[property].address_components[0].short_name)
+                                    $("#municipio").val(resultados[property].address_components[0].short_name);
+                                }
+                            }
+                    }
+                }
+            });
+        }
+
         $(document).ready(function () {
 
             var audioNombre = "@audioNombre";
@@ -428,48 +462,17 @@
             if (audioRelato == '') {
                 $("#download-relato").removeAttr('href');
             }
+            GetAddress();
         });
 
-        var map;
-        function initMap() {
-            map = new google.maps.Map(document.getElementById('map'), {
-                center: { lat: @denuncia.Latitud, lng: @denuncia.Longitud },
-                zoom: 10,
-            });
-
-
-
-            var marker = new google.maps.Marker({
-                position: { lat: @denuncia.Latitud, lng: @denuncia.Longitud },
-                map: map,
-                title: ''
-            });
-
-        }
-
-
-
-        @*function GetAddress() {
-            var latlng = new google.maps.LatLng(@denuncia.Latitud, @denuncia.Longitud);
-            var geocoder = geocoder = new google.maps.Geocoder();
-            geocoder.geocode({ 'latLng': latlng }, function (results, status) {
-                if (status == google.maps.GeocoderStatus.OK) {
-                    if (results[1]) {
-                        console.log(results[1]);
-                    }
-                }
-            });
-        }*@
 
 
         function asignar() {
             var IdDenuncia = "@denuncia.Id";
-            //console.log("Denuncia: "+IdDenuncia);
-            //console.log($("#mp").val());
             $.ajax({
                 type: 'POST',
                 url: "@Url.Action("Asignar", "Denuncia")",
-                data: { mp: $("#mp").val(), IdDenuncia: IdDenuncia},
+                data: { mp: $("#mp").val(), IdDenuncia: IdDenuncia, municipio:$("#municipio").val() },
                 success: function (data) {
                     console.log(data);
 

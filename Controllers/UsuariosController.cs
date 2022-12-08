@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using Modelos.Data;
 using Modelos;
 using NNA.Models.Forms;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace NNA.Controllers
 {
@@ -81,7 +83,7 @@ namespace NNA.Controllers
                     ApellidoPaterno = form.ApellidoPaterno,
                     ApellidoMaterno = form.ApellidoMaterno,
                     Correo = form.Correo,
-                    Contraseña = form.Password,
+                    Contraseña = GetSHA256(form.Password),
                     Estatus = true,
                     IdRol = Guid.Parse(form.Rol),
                     IdFiscalia = Guid.Parse("F54FD0D9-BE76-4C38-B7ED-EDEB6F4C9939"),
@@ -130,6 +132,18 @@ namespace NNA.Controllers
         {
             var unidades = await _Context.Unidades.Where(x => x.IdFiscalia.Equals(Guid.Parse(IdFiscalia)) && x.Estatus.Equals(true)).ToListAsync();
             return unidades;
+        }
+
+        public static string GetSHA256(string pass)
+        {
+            SHA256 sha256 = SHA256Managed.Create();
+            ASCIIEncoding encoding = new ASCIIEncoding();
+            byte[] stream = null;
+            StringBuilder sb = new StringBuilder();
+            stream = sha256.ComputeHash(encoding.GetBytes(pass));
+            for (int i = 0; i < stream.Length; i++) sb.AppendFormat("{0:x2}",stream[i]);
+            return sb.ToString();
+
         }
 
 

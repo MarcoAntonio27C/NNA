@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
 using NNAContext;
+using System.Security.Cryptography;
 
 namespace NNA.Controllers
 {
@@ -28,7 +29,7 @@ namespace NNA.Controllers
         [HttpPost]
         public async Task<string> ValidarAsync(Model model)
         {
-            var x = await _Context.Usuario.Where(x => x.Correo.Equals(model.correo) && x.Contraseña.Equals(model.password)).ToListAsync();
+            var x = await _Context.Usuario.Where(x => x.Correo.Equals(model.correo) && x.Contraseña.Equals(GetSHA256(model.password))).ToListAsync();
             if (x.Count() == 1) {
                 var claims = new List<Claim>
                 {
@@ -43,6 +44,17 @@ namespace NNA.Controllers
             return "false";
         }
 
+        public static string GetSHA256(string pass)
+        {
+            SHA256 sha256 = SHA256Managed.Create();
+            ASCIIEncoding encoding = new ASCIIEncoding();
+            byte[] stream = null;
+            StringBuilder sb = new StringBuilder();
+            stream = sha256.ComputeHash(encoding.GetBytes(pass));
+            for (int i = 0; i < stream.Length; i++) sb.AppendFormat("{0:x2}", stream[i]);
+            return sb.ToString();
+
+        }
 
         public async Task<IActionResult> Salir()
         {

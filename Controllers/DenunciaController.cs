@@ -145,11 +145,12 @@ namespace NNA.Controllers
 
         }
 
-        public async Task<string> Asignar(string mp, string IdDenuncia)
+        public async Task<string> Asignar(string mp, string IdDenuncia,string municipio)
         {
             var denuncia = await _Context.Denuncia.FindAsync(Guid.Parse(IdDenuncia));
             denuncia.Asignada = true;
             denuncia.Estatus = 1;
+            denuncia.Municipio = municipio;
             denuncia.IdMp = Guid.Parse(mp);
             _Context.Entry(denuncia).State = EntityState.Modified;
             var x = await _Context.SaveChangesAsync();
