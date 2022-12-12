@@ -68,21 +68,6 @@
                                     </ul>
                                 </div>
                             </li>
-
-                            <li>
-                                <a href="" id="denuncias" data-dropdown-toggle="dropdownNavbar" class="flex relative items-center justify-between w-full py-2 pl-3 pr-4 font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto">Denuncias</a>
-                                <!-- Dropdown menu -->
-                                <div id="menu-denuncias" class="z-10 hidden absolute  font-normal bg-white divide-y divide-gray-100 rounded shadow w-44">
-                                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
-                                        <li>
-                                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Sin Asignar</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Asignadas</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
                         }
 
 
@@ -103,16 +88,6 @@
                             </li>
                             <li>
                                 <a asp-controller="Fiscalia" asp-action="MP" id="" data-dropdown-toggle="dropdownNavbar" class="flex relative items-center justify-between w-full py-2 pl-3 pr-4 font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto">MP</a>
-                                <!-- Dropdown menu -->
-                                @*<div>
-                                    <div id="menu-denuncias" class="z-10 hidden absolute  font-normal bg-white divide-y divide-gray-100 rounded shadow w-44">
-                                        <ul class="py-1 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
-                                            <li>
-                                                <a asp-controller="Fiscalia" asp-action="Asignadas" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Asignadas</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>*@
                             </li>
                         }
 
@@ -121,21 +96,33 @@
                         {
                             <li>
                                 <a asp-controller="Agente" asp-action="Denuncias" id="denuncias" data-dropdown-toggle="dropdownNavbar" class="flex relative items-center justify-between w-full py-2 pl-3 pr-4 font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto">Denuncias</a>
-                                <!-- Dropdown menu -->
-                                @*<div id="menu-denuncias" class="z-10 hidden absolute  font-normal bg-white divide-y divide-gray-100 rounded shadow w-44">
-                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
-                        <li>
-                            <a asp-controller="Usuarios" asp-action="create" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Agregar</a>
-                        </li>
-                    </ul>
-                </div>*@
                             </li>
                         }
 
-
                         <li>
-                            <a class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent" asp-controller="Acceso" asp-action="Salir">Salir</a>
+                            <a  id="cuenta" data-dropdown-toggle="dropdownNavbar" class="flex relative items-center justify-between w-full py-2 pl-3 pr-4 font-medium text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                                    <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clip-rule="evenodd" />
+                                </svg>
+
+                            </a>
+                            <!-- Dropdown menu -->
+                            <div>
+                                <div id="menu-cuenta" class="z-10 hidden absolute  font-normal bg-white divide-y divide-gray-100 rounded shadow w-44">
+                                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
+                                        <li>
+                                            <a asp-controller="Acceso" asp-action="Password" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Cambiar Constraseña</a>
+                                        </li>
+                                        <li>
+                                            <a asp-controller="Acceso" asp-action="Salir" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Salir</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </li>
+                        @*<li>
+                            <a class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent" asp-controller="Acceso" asp-action="Salir">Salir</a>
+                        </li>*@
                     </ul>
                 </div>
             </div>

@@ -13,11 +13,11 @@ namespace Modelos
         public string Expediente { get; set; }
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Folio { get; set; }
-        public DateTime  Fecha { get; set; }
-        public string  Nombre { get; set; }
-        public string  NombreRecord { get; set; }
-        public string  Edad { get; set; }
-        public string  EdadRecord { get; set; }
+        public DateTime Fecha { get; set; }
+        public string Nombre { get; set; }
+        public string NombreRecord { get; set; }
+        public string Edad { get; set; }
+        public string EdadRecord { get; set; }
         public byte[] Photo { get; set; }
         public string ParentsName { get; set; }
         public string ParentsRecord { get; set; }
@@ -29,6 +29,7 @@ namespace Modelos
         public string Longitud { get; set; }
         public string PlaceName { get; set; }
         public string Municipio { get; set; }
+        public int IdMunicipio { get; set; }
         public string Evento { get; set; }
         public string EventoRecord { get; set; }
         public bool Asignada { get; set; }

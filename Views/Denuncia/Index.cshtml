@@ -381,7 +381,7 @@
                 <div class="col-span-6 pt-6 px-4">
                     <div class="">
                         <label class="block mb-2 text-sm font-medium text-gray-800 ">Lugar de la Denuncia</label>
-                        <label class="block mb-2 text-sm font-medium text-gray-800 ">@denuncia.PlaceName</label>
+                        <label id="ubicacion" class="block mb-2 text-sm font-medium text-gray-800 "></label>
                         <div class="block w-full h-80" id="map">
                         </div>
                     </div>
@@ -414,6 +414,10 @@
                 map: map,
                 title: ''
             });
+
+
+            GetAddress();
+
         }
 
             function GetAddress() {
@@ -424,10 +428,12 @@
                         let resultados = Object.values(results);
                         if (results[1]) {
                             console.log(resultados);
+                            $("#ubicacion").text(results[0].formatted_address);
                             for (const property in resultados) {
                                 if (resultados[property].types[0] == 'administrative_area_level_2') {
-                                    console.log(resultados[property].address_components[0].short_name)
+                                    console.log(resultados[property].address_components[0].short_name);
                                     $("#municipio").val(resultados[property].address_components[0].short_name);
+                                    
                                 }
                             }
                     }
@@ -462,7 +468,6 @@
             if (audioRelato == '') {
                 $("#download-relato").removeAttr('href');
             }
-            GetAddress();
         });
 
 
@@ -472,12 +477,19 @@
             $.ajax({
                 type: 'POST',
                 url: "@Url.Action("Asignar", "Denuncia")",
-                data: { mp: $("#mp").val(), IdDenuncia: IdDenuncia, municipio:$("#municipio").val() },
+                data: {
+                    mp: $("#mp").val(),
+                    IdDenuncia: IdDenuncia,
+                    municipio: $("#municipio").val(),
+                    ubicacion: $("#ubicacion").text()
+                },
                 success: function (data) {
                     console.log(data);
 
                     if (data == '1') {
-                         $(location).attr('href', "@Url.Action("Denuncias", "Fiscalia")")
+                        $(location).attr('href', "@Url.Action("Denuncias", "Fiscalia")")
+                    } else {
+                        console.log(data);
                     }
                 }
             });
@@ -493,6 +505,8 @@
                     console.log(data);
                     if (data == '1') {
                          $(location).attr('href', "@Url.Action("Denuncias", "Agente")")
+                    } else {
+                        console.log(data);
                     }
                 }
             });

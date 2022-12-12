@@ -156,3 +156,8 @@ C:\Users\Ast\source\repos\MarcoAntonio27C\NNA\obj\Release\net5.0\NNA.genruntimec
 C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Release\net5.0\Razor\Views\Fiscalia\Index.cshtml.g.cs
 C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Release\net5.0\Razor\Views\Agente\Index.cshtml.g.cs
 C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Release\net5.0\Razor\Views\Agente\Denuncias.cshtml.g.cs
+C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Release\net5.0\Razor\Views\Acceso\Password.cshtml.g.cs
+C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Release\net5.0\Razor\Views\Fiscalia\Asignadas.cshtml.g.cs
+C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Release\net5.0\Razor\Views\Fiscalia\Denuncias.cshtml.g.cs
+C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Release\net5.0\Razor\Views\Fiscalia\DenunciasMP.cshtml.g.cs
+C:\Users\Ast\Source\Repos\MarcoAntonio27C\NNA\obj\Release\net5.0\Razor\Views\Fiscalia\MP.cshtml.g.cs

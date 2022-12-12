@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
 using NNAContext;
 using System.Security.Cryptography;
+using Microsoft.AspNetCore.Identity;
 
 namespace NNA.Controllers
 {
@@ -29,6 +30,7 @@ namespace NNA.Controllers
         [HttpPost]
         public async Task<string> ValidarAsync(Model model)
         {
+            //var x = await _Context.Usuario.Where(x => x.Correo.Equals(model.correo) && x.Contraseña.Equals(model.password)).ToListAsync();
             var x = await _Context.Usuario.Where(x => x.Correo.Equals(model.correo) && x.Contraseña.Equals(GetSHA256(model.password))).ToListAsync();
             if (x.Count() == 1) {
                 var claims = new List<Claim>
@@ -55,6 +57,33 @@ namespace NNA.Controllers
             return sb.ToString();
 
         }
+
+        [HttpGet]
+        public IActionResult Password()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<string> SetPassword(string password) {
+
+            var user = await _Context.Usuario.Where(x => x.Correo.Equals(User.Identity.Name)).FirstAsync() ;
+            user.Contraseña = GetSHA256(password);
+            _Context.Entry(user).State = EntityState.Modified;
+            var result = await _Context.SaveChangesAsync();
+            return result.ToString(); ;
+        }
+
+
+        public async Task<IActionResult> Restablecer(Guid Iduser)
+        {
+            var user = await _Context.Usuario.FindAsync(Iduser);
+            user.Contraseña = GetSHA256("123456789");
+            _Context.Entry(user).State = EntityState.Modified;
+            var result = await _Context.SaveChangesAsync();
+            return RedirectToAction("Index", "Usuarios");
+        }
+
 
         public async Task<IActionResult> Salir()
         {
