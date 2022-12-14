@@ -4,7 +4,7 @@
 @using Microsoft.AspNetCore.Identity;
 @{
     Denuncia denuncia = (Denuncia)ViewData["denuncia"];
-    List<DataMP> mp = (List<DataMP>)ViewData["mp"];
+    //List<DataMP> mp = (List<DataMP>)ViewData["mp"];
     List<Estatus> estatus = (List<Estatus>)ViewData["estatus"];
     List<Municipio> municipios = (List<Municipio>)ViewData["municipios"];
     string audioNombre = ViewData["audioNombre"].ToString();
@@ -66,7 +66,7 @@
 
     <div class=" bg-gray-200 mt-9 overflow-x-auto  shadow-md sm:rounded-lg">
 
-        @if (User.IsInRole(("49ecfee1-61f3-4e38-a28a-fe74c1bcb02c").ToString().ToUpper()))  // Admin Fiscalia Especializada
+        @if (User.IsInRole(("49ecfee1-61f3-4e38-a28a-fe74c1bcb02c").ToString().ToUpper()) && !denuncia.Estatus.Equals(4))  // Admin Fiscalia Especializada
         {
             <div class="">
                 <h1 class="text-center text-xl font-bold my-4 mx-4">Asignar Denuncia</h1>
@@ -81,7 +81,7 @@
                         </div>
                         <div class="col-span-7 px-4">
                             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Agente del Ministerio Publico</label>
-                            <select class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" asp-items="@(new SelectList(mp,nameof(DataMP.Id), nameof(DataMP.NombreCompleto)))" name="mp" id="mp" required>
+                            <select class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" name="mp" id="mp" required>
                                 <option value=""></option>
                             </select>
                         </div>
@@ -440,7 +440,7 @@
                                 if (resultados[property].types[0] == 'administrative_area_level_2') {
                                     console.log(resultados[property].address_components[0].short_name);
                                     $("#municipio").val(resultados[property].address_components[0].short_name);
-                                    
+
                                 }
                             }
                     }
@@ -477,8 +477,26 @@
             }
 
 
-            $("#municipioMP").select(function () {
+            $("#municipioMP").change(function () {
                 console.log($(this).val());
+                $("#mp").empty();
+                            $.ajax({
+                type: 'POST',
+                url: "@Url.Action("GetAgentesMunicipio", "Denuncia")",
+                data: {
+                    idMunicipio: $("#municipioMP").val(),
+
+                },
+                success: function (data) {
+                    console.log(data);
+                    $.each(data, function (i, mp) {
+                        $("#mp").append($('<option>', {
+                            value: mp.id,
+                            text: mp.nombreCompleto
+                        }));
+                    });
+                }
+            });
             });
         });
 

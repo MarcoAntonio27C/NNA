@@ -35,7 +35,7 @@ namespace NNA.Controllers
                 }).ToListAsync();
 
             var denuncia = await _Context.Denuncia.FindAsync(Guid.Parse(id));
-            var mp = await GetAgentesAsync();
+          //  var mp = await GetAgentesAsync();
             var estatus = await _Context.Estatus.Where(x => x.Status.Equals(true)).ToListAsync();
             string emocion = "";
             string action = "";
@@ -65,8 +65,26 @@ namespace NNA.Controllers
             ViewData["audioSomeData"] = audioSomeData;
             ViewData["audioRelato"] = audioRelato;
             ViewData["municipios"] = municipios;
-            ViewData["mp"] = mp;
+          //  ViewData["mp"] = mp;
             return View();
+        }
+
+        [HttpPost]
+        [Produces("application/json")]
+        public async Task<List<DataMP>> GetAgentesMunicipio(int idMunicipio)
+        {
+            List<DataMP> agentes = await _Context.MP.Where(x => x.Estatus.Equals(true) && x.IdMunicipio.Equals(idMunicipio))
+                .Join(_Context.Unidades, agente => agente.IdUnidad, unidad => unidad.Id, (agente, unidad) => new { agente, unidad })
+                .Join(_Context.Fiscalias, join1 => join1.unidad.IdFiscalia, fiscalia => fiscalia.Id, (join1, fiscalia) => new DataMP
+                {
+                    Id = join1.agente.Id.ToString(),
+                    Unidad = join1.unidad.Nombre,
+                    NombreCompleto = join1.agente.ApellidoPaterno+" "+join1.agente.ApellidoMaterno + " " + join1.agente.Nombre+ " - "+ join1.unidad.Nombre,
+                    Fiscalia = fiscalia.Acronimo,
+                    Estatus = join1.agente.Estatus.ToString(),
+                }).ToListAsync();
+
+            return agentes;
         }
 
         public async Task<List<DataMP>> GetAgentesAsync()
@@ -77,7 +95,7 @@ namespace NNA.Controllers
                 {
                     Id = join1.agente.Id.ToString(),
                     Unidad = join1.unidad.Nombre,
-                    NombreCompleto = join1.agente.ApellidoPaterno+" "+join1.agente.ApellidoMaterno + " " + join1.agente.Nombre+ " - "+ join1.unidad.Nombre,
+                    NombreCompleto = join1.agente.ApellidoPaterno + " " + join1.agente.ApellidoMaterno + " " + join1.agente.Nombre + " - " + join1.unidad.Nombre,
                     Fiscalia = fiscalia.Acronimo,
                     Estatus = join1.agente.Estatus.ToString(),
                 }).ToListAsync();
