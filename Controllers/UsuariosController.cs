@@ -65,8 +65,10 @@ namespace NNA.Controllers
         public async Task<ActionResult> CreateAsync()
         {
             List<Roles> roles = await _Context.Roles.OrderBy(x => x.Nombre).ToListAsync();
+            List<Municipio> municipios = await _Context.Municipio.OrderBy(x => x.Nombre).ToListAsync();
             List<Fiscalias> fiscalias = await _Context.Fiscalias.Where(x => x.Estatus.Equals(true)).OrderBy(x => x.Nombre).ToListAsync();
             ViewData["roles"] = roles;
+            ViewData["municipios"] = municipios;
             ViewData["fiscalias"] = fiscalias;
             return View();
         }
@@ -103,6 +105,7 @@ namespace NNA.Controllers
                         AltaSistema = DateTime.Now,
                         Estatus = true,
                         IdUnidad = Guid.Parse(form.Unidad),
+                        IdMunicipio = Int32.Parse(form.Municipio),
                         IdUsuario = usuario.Id
                     };
 

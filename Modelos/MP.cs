@@ -15,6 +15,7 @@ namespace Modelos
         public DateTime AltaSistema { get; set; }
         public bool Estatus { get; set; }
         public Guid IdUnidad { get; set; }
+        public int IdMunicipio { get; set; }
         public Guid IdUsuario { get; set; }
     }
 }

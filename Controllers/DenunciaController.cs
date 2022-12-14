@@ -28,6 +28,12 @@ namespace NNA.Controllers
 
         public async Task<IActionResult> IndexAsync(string id)
         {
+            List<Municipio> municipios = await _Context.Municipio.OrderBy(x => x.Nombre)
+                .Join(_Context.MP, municipio => municipio.Id, mp => mp.IdMunicipio, (municipio, mp) => new Municipio {
+                Id= municipio.Id,
+                Nombre = municipio.Nombre
+                }).ToListAsync();
+
             var denuncia = await _Context.Denuncia.FindAsync(Guid.Parse(id));
             var mp = await GetAgentesAsync();
             var estatus = await _Context.Estatus.Where(x => x.Status.Equals(true)).ToListAsync();
@@ -58,6 +64,7 @@ namespace NNA.Controllers
             ViewData["audioParents"] = audioParents;
             ViewData["audioSomeData"] = audioSomeData;
             ViewData["audioRelato"] = audioRelato;
+            ViewData["municipios"] = municipios;
             ViewData["mp"] = mp;
             return View();
         }

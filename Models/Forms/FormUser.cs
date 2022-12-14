@@ -14,6 +14,7 @@ namespace NNA.Models.Forms
         public string Rol { get; set; }
         public string Fiscalia { get; set; }
         public string Unidad { get; set; }
+        public string Municipio { get; set; }
         public string Password { get; set; }
     }
 }

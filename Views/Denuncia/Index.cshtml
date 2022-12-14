@@ -6,6 +6,7 @@
     Denuncia denuncia = (Denuncia)ViewData["denuncia"];
     List<DataMP> mp = (List<DataMP>)ViewData["mp"];
     List<Estatus> estatus = (List<Estatus>)ViewData["estatus"];
+    List<Municipio> municipios = (List<Municipio>)ViewData["municipios"];
     string audioNombre = ViewData["audioNombre"].ToString();
     string audioEdad = ViewData["audioEdad"].ToString();
     string audioParents = ViewData["audioParents"].ToString();
@@ -72,7 +73,13 @@
 
                 <form action="javascript:asignar()" name="asignar" id="asignar">
                     <div class="grid grid-cols-12">
-                        <div class="col-span-10 px-4">
+                        <div class="col-span-3 px-4">
+                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Municipio</label>
+                            <select class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" asp-items="@(new SelectList(municipios,nameof(Municipio.Id), nameof(Municipio.Nombre)))" name="municipioMP" id="municipioMP" required>
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <div class="col-span-7 px-4">
                             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Agente del Ministerio Publico</label>
                             <select class="bg-gray-50 border border-yellow-600 text-gray-900 text-sm rounded-lg  block w-full p-2.5" asp-items="@(new SelectList(mp,nameof(DataMP.Id), nameof(DataMP.NombreCompleto)))" name="mp" id="mp" required>
                                 <option value=""></option>
@@ -468,6 +475,11 @@
             if (audioRelato == '') {
                 $("#download-relato").removeAttr('href');
             }
+
+
+            $("#municipioMP").select(function () {
+                console.log($(this).val());
+            });
         });
 
 
