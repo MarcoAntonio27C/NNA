@@ -81,7 +81,7 @@ namespace API.Controllers
                 if (denuncia.ParentsRecord != null)
                 {
                     //Se inserta parentsrecord
-                    request = (FtpWebRequest)WebRequest.Create("ftp://10.24.1.29/NNA/" + denuncia.Id + "parentsrecord.txt");
+                    request = (FtpWebRequest)WebRequest.Create("ftp://10.24.1.13/NNA/" + denuncia.Id + "parentsrecord.txt");
                     request.Method = WebRequestMethods.Ftp.UploadFile;
                     request.Credentials = new NetworkCredential("anonymous", "luis_cruz.jimenez@fiscalia.puebla.gob.mx");
                     var filecontent3 = Encoding.ASCII.GetBytes(denuncia.ParentsRecord);

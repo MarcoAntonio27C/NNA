@@ -97,7 +97,7 @@
         }
 
 
-        @if (User.IsInRole(("6F1BE536-C224-4F31-914E-C9D00CCE1EB9").ToString().ToUpper())) // Agente del Ministerio Publico
+        @if (User.IsInRole(("6F1BE536-C224-4F31-914E-C9D00CCE1EB9").ToString().ToUpper()) && !denuncia.Estatus.Equals(4) ) // Agente del Ministerio Publico
         {
             <div class="">
                 <h1 class="text-center text-xl font-bold my-4 mx-4">Estatus</h1>
@@ -397,8 +397,6 @@
             @*<button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>*@
         </form>
     </div>
-
-    <button onclick="GetAddress()" >Ver Direccion</button>
 </div>
 
 
